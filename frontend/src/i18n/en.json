@@ -1,0 +1,433 @@
+{
+  "lang": "en",
+  "nav": {
+    "login": "Sign In",
+    "register": "Get Started",
+    "dashboard": "Dashboard",
+    "logout": "Log Out",
+    "home": "Home",
+    "admin": "Administration",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "landing": {
+    "overline": "AI-Powered Audio Transcription",
+    "title": "Transform your audio into text",
+    "subtitle": "Automatic AI-powered transcription. Upload, transcribe and translate your audio and video files in a few clicks.",
+    "cta": "Get Started Free",
+    "learnMore": "Learn More",
+    "featuresOverline": "Features",
+    "featuresTitle": "Everything you need",
+    "features": [
+      { "title": "Easy Upload", "desc": "Drag and drop your audio or video files. Supports MP3, MP4, WAV and more." },
+      { "title": "Whisper AI", "desc": "Powered by OpenAI Whisper, the most advanced speech recognition technology." },
+      { "title": "Multi-language", "desc": "Automatic detection and translation to over 10 different languages." },
+      { "title": "Flexible Export", "desc": "Download as TXT or SRT for your video and subtitle projects." },
+      { "title": "Fast", "desc": "Real-time transcription with progress tracking." },
+      { "title": "Secure", "desc": "Files automatically deleted after transcription. GDPR compliant." }
+    ],
+    "processOverline": "Process",
+    "processTitle": "How it works",
+    "steps": [
+      { "step": "01", "title": "Upload", "desc": "Drag your audio or video file into the drop zone." },
+      { "step": "02", "title": "Transcribe", "desc": "Our AI automatically analyzes and transcribes your content." },
+      { "step": "03", "title": "Export", "desc": "Edit, translate and download your transcription." }
+    ],
+    "ctaOverline": "Ready to start?",
+    "ctaTitle": "Ready to transform your media?",
+    "ctaSubtitle": "Join thousands of users who use TranscriptFlow for their projects.",
+    "ctaButton": "Start Now",
+    "footer": "All rights reserved."
+  },
+  "auth": {
+    "welcomeBack": "Welcome",
+    "loginTitle": "Sign In",
+    "loginSubtitle": "Access your transcription workspace",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "confirmPassword": "Confirm",
+    "name": "Full Name",
+    "namePlaceholder": "John Doe",
+    "loginBtn": "Sign In",
+    "loggingIn": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create an account",
+    "registerOverline": "Registration",
+    "registerTitle": "Create an account",
+    "registerSubtitle": "Start transcribing your files",
+    "registerBtn": "Create my account",
+    "creating": "Creating...",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "loginSuccess": "Logged in successfully",
+    "registerSuccess": "Account created successfully",
+    "invalidCredentials": "Invalid credentials",
+    "registerError": "Error creating account",
+    "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "quoteLogin": "Speech is silver, transcription is gold.",
+    "quoteRegister": "Every voice deserves to be transcribed.",
+    "rgpdConsent": "I accept the",
+    "rgpdPrivacy": "privacy policy",
+    "rgpdAnd": "and the",
+    "rgpdTerms": "terms of use",
+    "rgpdRequired": "You must accept the privacy policy"
+  },
+  "dashboard": {
+    "uploadTab": "UPLOAD",
+    "recordTab": "RECORD",
+    "dropTitle": "Drag and drop your file here",
+    "dropSubtitle": "or click to select",
+    "dropFormats": "MP3, MP4, WAV, M4A, WEBM · MAX 25 MB",
+    "uploading": "Uploading...",
+    "historyOverline": "History",
+    "historyTitle": "My Transcriptions",
+    "fileCount": "FILE",
+    "filesCount": "FILES",
+    "noTranscriptions": "No transcriptions",
+    "noTranscriptionsHint": "Upload your first file to get started",
+    "view": "View",
+    "viewTranscription": "View transcription",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this transcription?",
+    "deleteSuccess": "Transcription deleted",
+    "deleteFail": "Deletion failed",
+    "uploadSuccess": "File uploaded. Transcription in progress...",
+    "uploadFail": "Upload failed",
+    "invalidFormat": "Unsupported format. Formats:",
+    "fileTooLarge": "File exceeds 25 MB limit",
+    "statusCompleted": "Completed",
+    "statusFailed": "Failed",
+    "statusProcessing": "Processing"
+  },
+  "transcription": {
+    "transcriptionLabel": "Transcription",
+    "translationLabel": "Translation",
+    "copy": "Copy",
+    "copied": "Text copied",
+    "save": "Save",
+    "saving": "Saving...",
+    "saved": "Changes saved",
+    "saveFail": "Save failed",
+    "unsaved": "Unsaved",
+    "original": "Original",
+    "translationPanel": "Translation",
+    "targetLanguage": "Target language",
+    "selectLanguage": "Select",
+    "translate": "Translate",
+    "translating": "Translating...",
+    "translateSuccess": "Translation completed",
+    "translateFail": "Translation failed",
+    "selectLangError": "Select a target language",
+    "translatedTo": "Translated to",
+    "infoPanel": "Information",
+    "file": "File",
+    "language": "Language",
+    "duration": "Duration",
+    "date": "Date",
+    "statsPanel": "Statistics",
+    "words": "Words",
+    "characters": "Characters",
+    "lines": "Lines",
+    "wpm": "Words/min",
+    "processingTitle": "Transcription in progress",
+    "processingSubtitle": "Please wait",
+    "failedTitle": "Transcription failed",
+    "failedSubtitle": "An error occurred",
+    "backToDashboard": "Back to dashboard",
+    "placeholder": "Your transcription will appear here...",
+    "notFound": "Transcription not found",
+    "downloadFail": "Download failed",
+    "downloadSuccess": "downloaded"
+  },
+  "recorder": {
+    "overline": "Recording",
+    "startHint": "Click to start",
+    "recording": "Recording...",
+    "paused": "Paused",
+    "micError": "Unable to access microphone. Check permissions."
+  },
+  "admin": {
+    "title": "Administration",
+    "tabs": {
+      "overview": "Overview",
+      "origins": "Origins",
+      "users": "Users",
+      "transcriptions": "Transcriptions"
+    },
+    "stats": {
+      "users": "Users",
+      "transcriptions": "Transcriptions",
+      "totalDuration": "Total Duration",
+      "totalWords": "Words Transcribed",
+      "completed": "Completed",
+      "failed": "Failed",
+      "translations": "Translations",
+      "successRate": "Success Rate"
+    },
+    "charts": {
+      "dailyTranscriptions": "Transcriptions per day",
+      "detectedLanguages": "Detected languages",
+      "completedLabel": "Completed",
+      "failedLabel": "Failed"
+    },
+    "origins": {
+      "emailDomains": "Email Domains",
+      "tld": "Extensions (TLD)",
+      "registrations": "Registrations",
+      "uniqueDomains": "Unique domains",
+      "uniqueTlds": "Unique extensions",
+      "topDomain": "Top domain",
+      "topTld": "Top extension"
+    },
+    "usersSection": {
+      "management": "Management",
+      "title": "Users",
+      "accounts": "ACCOUNTS",
+      "columns": { "name": "Name", "email": "Email", "domain": "Domain", "transcriptions": "Transcriptions", "registered": "Registered" }
+    },
+    "transcriptionsSection": {
+      "title": "Transcriptions",
+      "files": "FILES",
+      "columns": { "file": "File", "user": "User", "language": "Language", "status": "Status", "date": "Date" },
+      "statusCompleted": "COMPLETED",
+      "statusFailed": "FAILED",
+      "statusProcessing": "PROCESSING"
+    },
+    "deleteUserConfirm": "Delete user and all their transcriptions?",
+    "deleteTransConfirm": "Delete this transcription?",
+    "userDeleted": "User deleted",
+    "transDeleted": "Transcription deleted",
+    "forbidden": "Access Denied",
+    "forbiddenMsg": "You do not have admin permissions.",
+    "backToDashboard": "Back to Dashboard",
+    "noData": "No data"
+  },
+  "cookie": {
+    "title": "We use cookies",
+    "message": "This site uses essential cookies for functionality and analytics cookies to improve your experience. In accordance with GDPR, we ask for your consent.",
+    "accept": "Accept All",
+    "reject": "Reject",
+    "customize": "Customize",
+    "essential": "Essential cookies",
+    "essentialDesc": "Required for site operation (session, authentication).",
+    "analytics": "Analytics cookies",
+    "analyticsDesc": "Help us understand how you use the site.",
+    "savePrefs": "Save my preferences"
+  },
+  "privacy": {
+    "overline": "Legal",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "sections": [
+      {
+        "title": "1. Introduction",
+        "content": "TranscriptFlow is committed to protecting the privacy of its users. This privacy policy describes how we collect, use and protect your personal data, in accordance with the General Data Protection Regulation (GDPR - EU 2016/679)."
+      },
+      {
+        "title": "2. Data Controller",
+        "content": "The data controller is TranscriptFlow. For any questions about your data, contact us at: privacy@transcriptflow.com"
+      },
+      {
+        "title": "3. Data Collected",
+        "content": "We collect the following data:\n- Registration data: name, email address, password (hashed)\n- Audio/video files: temporarily uploaded for transcription, then automatically deleted\n- Transcriptions: text generated from your audio files\n- Technical data: IP address, browser type, preferred language\n- Cookies: essential (session) and analytics (with consent)"
+      },
+      {
+        "title": "4. Legal Basis for Processing",
+        "content": "The processing of your data is based on:\n- Your explicit consent (Article 6.1.a of the GDPR)\n- Performance of the service contract (Article 6.1.b)\n- Our legitimate interests to improve the service (Article 6.1.f)"
+      },
+      {
+        "title": "5. Purpose of Processing",
+        "content": "Your data is used to:\n- Provide the audio transcription service\n- Manage your user account\n- Improve service quality\n- Communicate with you about your account"
+      },
+      {
+        "title": "6. Data Retention",
+        "content": "- Audio files: deleted immediately after transcription\n- Transcriptions: retained until deleted by the user\n- Account data: retained until account deletion\n- Technical logs: 12 months maximum"
+      },
+      {
+        "title": "7. Your Rights (GDPR)",
+        "content": "Under the GDPR, you have the following rights:\n- Right of access: view your personal data\n- Right to rectification: correct your data\n- Right to erasure (right to be forgotten): delete your account and all your data\n- Right to portability: export your data in a readable format\n- Right to object: object to the processing of your data\n- Right to restriction: restrict processing\n\nTo exercise these rights, use the options available in your profile or contact us."
+      },
+      {
+        "title": "8. Data Security",
+        "content": "We implement appropriate technical and organizational measures:\n- Password encryption (bcrypt)\n- Secure HTTPS connections\n- Restricted access to personal data\n- Automatic deletion of audio files after processing"
+      },
+      {
+        "title": "9. International Transfers",
+        "content": "Your data may be transferred to servers outside the EU for AI processing (OpenAI Whisper). These transfers are governed by standard contractual clauses compliant with the GDPR."
+      },
+      {
+        "title": "10. Contact",
+        "content": "For any questions about this policy or your personal data:\nEmail: privacy@transcriptflow.com\n\nYou may also file a complaint with your local data protection authority."
+      }
+    ]
+  },
+  "terms": {
+    "overline": "Legal",
+    "title": "Terms of Use",
+    "lastUpdated": "Last updated",
+    "sections": [
+      {
+        "title": "1. Purpose",
+        "content": "These terms govern the use of the TranscriptFlow service, an AI-powered audio transcription tool."
+      },
+      {
+        "title": "2. Registration",
+        "content": "Using the service requires creating an account. You agree to provide accurate information and maintain the confidentiality of your credentials."
+      },
+      {
+        "title": "3. Transcription Service",
+        "content": "TranscriptFlow provides an AI-based automatic transcription service. Transcription accuracy depends on audio quality and is not guaranteed at 100%."
+      },
+      {
+        "title": "4. Intellectual Property",
+        "content": "You retain ownership of your audio files and generated transcriptions. TranscriptFlow does not claim any rights to your content."
+      },
+      {
+        "title": "5. Acceptable Use",
+        "content": "You agree not to use the service to:\n- Transcribe illegal content or content that infringes others' rights\n- Intentionally overload the service\n- Attempt to access other users' data"
+      },
+      {
+        "title": "6. Limitation of Liability",
+        "content": "TranscriptFlow shall not be liable for transcription errors, service interruptions, or data loss."
+      },
+      {
+        "title": "7. Data Protection",
+        "content": "The processing of your personal data is governed by our Privacy Policy, in compliance with the GDPR."
+      },
+      {
+        "title": "8. Changes to Terms",
+        "content": "We reserve the right to modify these terms. Users will be notified of any significant changes."
+      },
+      {
+        "title": "9. Termination",
+        "content": "You can delete your account at any time. TranscriptFlow reserves the right to suspend or delete an account in case of violation of these terms."
+      },
+      {
+        "title": "10. Governing Law",
+        "content": "These terms are governed by French law. In case of dispute, French courts shall have exclusive jurisdiction."
+      }
+    ]
+  },
+  "profile": {
+    "overline": "My Account",
+    "title": "Profile",
+    "personalInfo": "Personal Information",
+    "dataRights": "My GDPR Rights",
+    "exportData": "Export my data",
+    "exportDataDesc": "Download all your personal data in a readable format (JSON).",
+    "exportBtn": "Download my data",
+    "exporting": "Exporting...",
+    "exportSuccess": "Data exported successfully",
+    "exportFail": "Export failed",
+    "deleteAccount": "Delete my account",
+    "deleteAccountDesc": "Permanently delete your account and all your data. This action is irreversible.",
+    "deleteBtn": "Delete my account",
+    "deleteConfirm": "Are you sure? This will permanently delete your account and all transcriptions. Type DELETE to confirm.",
+    "deleteConfirmWord": "DELETE",
+    "deleteSuccess": "Account deleted successfully",
+    "deleteFail": "Deletion failed"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "French",
+    "es": "Spanish",
+    "de": "German",
+    "it": "Italian",
+    "pt": "Portuguese",
+    "ja": "Japanese",
+    "zh": "Chinese",
+    "ko": "Korean",
+    "ar": "Arabic",
+    "french": "French",
+    "english": "English",
+    "spanish": "Spanish",
+    "german": "German",
+    "italian": "Italian",
+    "portuguese": "Portuguese",
+    "dutch": "Dutch",
+    "russian": "Russian"
+  },
+  "subscription": {
+    "title": "Subscription",
+    "freeUsage": "Free usage",
+    "used": "used",
+    "of": "of",
+    "unlimited": "Unlimited",
+    "limitReached": "Limit reached",
+    "limitReachedMsg": "You've reached your free monthly limit. Subscribe for unlimited access.",
+    "subscribePro": "Upgrade to Pro",
+    "proTitle": "TranscriptFlow Pro",
+    "proDesc": "Unlimited transcription",
+    "perMonth": "/month",
+    "subscribed": "Subscribed",
+    "subscribedMsg": "You have an active subscription.",
+    "expiresAt": "Expires on",
+    "cancel": "Cancel subscription",
+    "cancelConfirm": "Are you sure you want to cancel your subscription?",
+    "cancelled": "Subscription cancelled",
+    "activated": "Subscription activated successfully!",
+    "activationFailed": "Activation failed",
+    "features": ["Unlimited transcription", "Unlimited translation", "Priority support", "All export formats"],
+    "remainingTime": "Remaining time"
+  },
+  "adminSettings": {
+    "title": "Settings",
+    "subscriptionSection": "Subscription & Limits",
+    "enableSubscription": "Enable subscription system",
+    "enabledDesc": "Free users will be limited and can subscribe via PayPal.",
+    "disabledDesc": "All users have unlimited access.",
+    "freeLimit": "Free limit (seconds)",
+    "freeLimitHelp": "Maximum transcription duration per month for free users.",
+    "monthlyPrice": "Monthly price",
+    "yearlyPrice": "Yearly price",
+    "yearlyEnabled": "Enable yearly plan",
+    "yearlyEnabledDesc": "Allow users to choose an annual subscription.",
+    "currency": "Currency",
+    "createPlan": "Create PayPal plans",
+    "planCreated": "PayPal plans created",
+    "planExists": "Active PayPal plan",
+    "monthlyPlanId": "Monthly plan",
+    "yearlyPlanId": "Yearly plan",
+    "saveSettings": "Save",
+    "saved": "Settings saved",
+    "subscriptions": "Subscriptions",
+    "noSubscriptions": "No subscriptions",
+    "couponsSection": "Discount Coupons",
+    "couponCode": "Coupon code",
+    "couponDiscount": "Discount (%)",
+    "couponMaxUses": "Max uses",
+    "couponExpires": "Expiry date",
+    "couponPlanType": "Plan type",
+    "couponPlanAll": "All",
+    "couponPlanMonthly": "Monthly",
+    "couponPlanYearly": "Yearly",
+    "addCoupon": "Add coupon",
+    "couponAdded": "Coupon created",
+    "couponDeleted": "Coupon deleted",
+    "couponToggled": "Coupon status changed",
+    "noCoupons": "No coupons",
+    "active": "Active",
+    "inactive": "Inactive",
+    "uses": "uses"
+  },
+  "subscriptionYearly": {
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "perYear": "/year",
+    "savings": "Save",
+    "couponLabel": "Promo code",
+    "couponPlaceholder": "Enter a promo code",
+    "applyCoupon": "Apply",
+    "couponApplied": "Coupon applied",
+    "couponInvalid": "Invalid promo code",
+    "couponExpired": "This coupon has expired",
+    "couponUsed": "You have already used this coupon",
+    "couponFull": "This coupon is fully used",
+    "originalPrice": "Original price",
+    "discountedPrice": "Discounted price",
+    "freeAccess": "Free access activated!",
+    "removeCoupon": "Remove"
+  }
+}

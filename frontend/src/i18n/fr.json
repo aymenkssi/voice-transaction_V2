@@ -1,0 +1,433 @@
+{
+  "lang": "fr",
+  "nav": {
+    "login": "Connexion",
+    "register": "Commencer",
+    "dashboard": "Dashboard",
+    "logout": "Déconnexion",
+    "home": "Accueil",
+    "admin": "Administration",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
+  },
+  "landing": {
+    "overline": "Transcription Audio par IA",
+    "title": "Transformez votre audio en texte",
+    "subtitle": "Transcription automatique propulsée par l'IA. Téléchargez, transcrivez et traduisez vos fichiers audio et vidéo en quelques clics.",
+    "cta": "Commencer Gratuitement",
+    "learnMore": "En savoir plus",
+    "featuresOverline": "Fonctionnalités",
+    "featuresTitle": "Tout ce dont vous avez besoin",
+    "features": [
+      { "title": "Upload Facile", "desc": "Glissez-déposez vos fichiers audio ou vidéo. Formats MP3, MP4, WAV et plus." },
+      { "title": "IA Whisper", "desc": "Propulsé par OpenAI Whisper, la technologie de reconnaissance vocale la plus avancée." },
+      { "title": "Multi-langues", "desc": "Détection automatique et traduction vers plus de 10 langues différentes." },
+      { "title": "Export Flexible", "desc": "Téléchargez en TXT ou SRT pour vos projets vidéo et sous-titres." },
+      { "title": "Rapide", "desc": "Transcription en temps réel avec suivi de progression." },
+      { "title": "Sécurisé", "desc": "Fichiers supprimés automatiquement après transcription. Conforme RGPD." }
+    ],
+    "processOverline": "Processus",
+    "processTitle": "Comment ça marche",
+    "steps": [
+      { "step": "01", "title": "Téléchargez", "desc": "Glissez votre fichier audio ou vidéo dans la zone de dépôt." },
+      { "step": "02", "title": "Transcrivez", "desc": "Notre IA analyse et transcrit automatiquement votre contenu." },
+      { "step": "03", "title": "Exportez", "desc": "Modifiez, traduisez et téléchargez votre transcription." }
+    ],
+    "ctaOverline": "Prêt à commencer ?",
+    "ctaTitle": "Prêt à transformer vos médias ?",
+    "ctaSubtitle": "Rejoignez des milliers d'utilisateurs qui utilisent TranscriptFlow pour leurs projets.",
+    "ctaButton": "Commencer Maintenant",
+    "footer": "Tous droits réservés."
+  },
+  "auth": {
+    "welcomeBack": "Bienvenue",
+    "loginTitle": "Connexion",
+    "loginSubtitle": "Accédez à votre espace de transcription",
+    "email": "Email",
+    "emailPlaceholder": "vous@exemple.com",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer",
+    "name": "Nom complet",
+    "namePlaceholder": "Jean Dupont",
+    "loginBtn": "Se connecter",
+    "loggingIn": "Connexion...",
+    "noAccount": "Pas encore de compte ?",
+    "createAccount": "Créer un compte",
+    "registerOverline": "Inscription",
+    "registerTitle": "Créer un compte",
+    "registerSubtitle": "Commencez à transcrire vos fichiers",
+    "registerBtn": "Créer mon compte",
+    "creating": "Création...",
+    "hasAccount": "Déjà un compte ?",
+    "signIn": "Se connecter",
+    "loginSuccess": "Connexion réussie",
+    "registerSuccess": "Compte créé avec succès",
+    "invalidCredentials": "Identifiants invalides",
+    "registerError": "Erreur lors de la création",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+    "quoteLogin": "La parole est d'argent, la transcription est d'or.",
+    "quoteRegister": "Chaque voix mérite d'être transcrite.",
+    "rgpdConsent": "J'accepte la",
+    "rgpdPrivacy": "politique de confidentialité",
+    "rgpdAnd": "et les",
+    "rgpdTerms": "conditions d'utilisation",
+    "rgpdRequired": "Vous devez accepter la politique de confidentialité"
+  },
+  "dashboard": {
+    "uploadTab": "TÉLÉCHARGER",
+    "recordTab": "ENREGISTRER",
+    "dropTitle": "Glissez-déposez votre fichier ici",
+    "dropSubtitle": "ou cliquez pour sélectionner",
+    "dropFormats": "MP3, MP4, WAV, M4A, WEBM · MAX 25 MO",
+    "uploading": "Téléchargement en cours...",
+    "historyOverline": "Historique",
+    "historyTitle": "Mes Transcriptions",
+    "fileCount": "FICHIER",
+    "filesCount": "FICHIERS",
+    "noTranscriptions": "Aucune transcription",
+    "noTranscriptionsHint": "Téléchargez votre premier fichier pour commencer",
+    "view": "Voir",
+    "viewTranscription": "Voir la transcription",
+    "delete": "Supprimer",
+    "deleteConfirm": "Supprimer cette transcription ?",
+    "deleteSuccess": "Transcription supprimée",
+    "deleteFail": "Échec de la suppression",
+    "uploadSuccess": "Fichier téléchargé. Transcription en cours...",
+    "uploadFail": "Échec du téléchargement",
+    "invalidFormat": "Format non supporté. Formats :",
+    "fileTooLarge": "Le fichier dépasse la limite de 25 Mo",
+    "statusCompleted": "Terminé",
+    "statusFailed": "Échec",
+    "statusProcessing": "En cours"
+  },
+  "transcription": {
+    "transcriptionLabel": "Transcription",
+    "translationLabel": "Traduction",
+    "copy": "Copier",
+    "copied": "Texte copié",
+    "save": "Enregistrer",
+    "saving": "Sauvegarde...",
+    "saved": "Modifications enregistrées",
+    "saveFail": "Échec de la sauvegarde",
+    "unsaved": "Non enregistré",
+    "original": "Original",
+    "translationPanel": "Traduction",
+    "targetLanguage": "Langue cible",
+    "selectLanguage": "Sélectionner",
+    "translate": "Traduire",
+    "translating": "Traduction...",
+    "translateSuccess": "Traduction terminée",
+    "translateFail": "Échec de la traduction",
+    "selectLangError": "Sélectionnez une langue cible",
+    "translatedTo": "Traduit en",
+    "infoPanel": "Informations",
+    "file": "Fichier",
+    "language": "Langue",
+    "duration": "Durée",
+    "date": "Date",
+    "statsPanel": "Statistiques",
+    "words": "Mots",
+    "characters": "Caractères",
+    "lines": "Lignes",
+    "wpm": "Mots/min",
+    "processingTitle": "Transcription en cours",
+    "processingSubtitle": "Veuillez patienter",
+    "failedTitle": "Échec de la transcription",
+    "failedSubtitle": "Une erreur s'est produite",
+    "backToDashboard": "Retour au dashboard",
+    "placeholder": "Votre transcription apparaîtra ici...",
+    "notFound": "Transcription non trouvée",
+    "downloadFail": "Échec du téléchargement",
+    "downloadSuccess": "téléchargé"
+  },
+  "recorder": {
+    "overline": "Enregistrement",
+    "startHint": "Cliquez pour commencer",
+    "recording": "Enregistrement en cours...",
+    "paused": "En pause",
+    "micError": "Impossible d'accéder au microphone. Vérifiez les permissions."
+  },
+  "admin": {
+    "title": "Administration",
+    "tabs": {
+      "overview": "Vue d'ensemble",
+      "origins": "Origines",
+      "users": "Utilisateurs",
+      "transcriptions": "Transcriptions"
+    },
+    "stats": {
+      "users": "Utilisateurs",
+      "transcriptions": "Transcriptions",
+      "totalDuration": "Durée totale",
+      "totalWords": "Mots transcrits",
+      "completed": "Terminées",
+      "failed": "Échouées",
+      "translations": "Traductions",
+      "successRate": "Taux réussite"
+    },
+    "charts": {
+      "dailyTranscriptions": "Transcriptions par jour",
+      "detectedLanguages": "Langues détectées",
+      "completedLabel": "Terminées",
+      "failedLabel": "Échouées"
+    },
+    "origins": {
+      "emailDomains": "Domaines Email",
+      "tld": "Extensions (TLD)",
+      "registrations": "Inscriptions",
+      "uniqueDomains": "Domaines uniques",
+      "uniqueTlds": "Extensions uniques",
+      "topDomain": "Domaine principal",
+      "topTld": "Extension principale"
+    },
+    "usersSection": {
+      "management": "Gestion",
+      "title": "Utilisateurs",
+      "accounts": "COMPTES",
+      "columns": { "name": "Nom", "email": "Email", "domain": "Domaine", "transcriptions": "Transcriptions", "registered": "Inscrit le" }
+    },
+    "transcriptionsSection": {
+      "title": "Transcriptions",
+      "files": "FICHIERS",
+      "columns": { "file": "Fichier", "user": "Utilisateur", "language": "Langue", "status": "Statut", "date": "Date" },
+      "statusCompleted": "TERMINÉ",
+      "statusFailed": "ÉCHEC",
+      "statusProcessing": "EN COURS"
+    },
+    "deleteUserConfirm": "Supprimer l'utilisateur et toutes ses transcriptions ?",
+    "deleteTransConfirm": "Supprimer cette transcription ?",
+    "userDeleted": "Utilisateur supprimé",
+    "transDeleted": "Transcription supprimée",
+    "forbidden": "Accès Refusé",
+    "forbiddenMsg": "Vous n'avez pas les droits d'administration.",
+    "backToDashboard": "Retour au Dashboard",
+    "noData": "Aucune donnée"
+  },
+  "cookie": {
+    "title": "Nous utilisons des cookies",
+    "message": "Ce site utilise des cookies essentiels pour son fonctionnement et des cookies analytiques pour améliorer votre expérience. Conformément au RGPD, nous vous demandons votre consentement.",
+    "accept": "Accepter tout",
+    "reject": "Refuser",
+    "customize": "Personnaliser",
+    "essential": "Cookies essentiels",
+    "essentialDesc": "Nécessaires au fonctionnement du site (session, authentification).",
+    "analytics": "Cookies analytiques",
+    "analyticsDesc": "Nous aident à comprendre comment vous utilisez le site.",
+    "savePrefs": "Enregistrer mes préférences"
+  },
+  "privacy": {
+    "overline": "Légal",
+    "title": "Politique de Confidentialité",
+    "lastUpdated": "Dernière mise à jour",
+    "sections": [
+      {
+        "title": "1. Introduction",
+        "content": "TranscriptFlow s'engage à protéger la vie privée de ses utilisateurs. Cette politique de confidentialité décrit comment nous collectons, utilisons et protégeons vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679)."
+      },
+      {
+        "title": "2. Responsable du traitement",
+        "content": "Le responsable du traitement des données est TranscriptFlow. Pour toute question relative à vos données, contactez-nous à : privacy@transcriptflow.com"
+      },
+      {
+        "title": "3. Données collectées",
+        "content": "Nous collectons les données suivantes :\n- Données d'inscription : nom, adresse email, mot de passe (haché)\n- Fichiers audio/vidéo : téléchargés temporairement pour la transcription, puis supprimés automatiquement\n- Transcriptions : texte généré à partir de vos fichiers audio\n- Données techniques : adresse IP, type de navigateur, langue préférée\n- Cookies : essentiels (session) et analytiques (avec consentement)"
+      },
+      {
+        "title": "4. Base juridique du traitement",
+        "content": "Le traitement de vos données est fondé sur :\n- Votre consentement explicite (Article 6.1.a du RGPD)\n- L'exécution du contrat de service (Article 6.1.b)\n- Nos intérêts légitimes pour améliorer le service (Article 6.1.f)"
+      },
+      {
+        "title": "5. Finalité du traitement",
+        "content": "Vos données sont utilisées pour :\n- Fournir le service de transcription audio\n- Gérer votre compte utilisateur\n- Améliorer la qualité du service\n- Communiquer avec vous concernant votre compte"
+      },
+      {
+        "title": "6. Durée de conservation",
+        "content": "- Fichiers audio : supprimés immédiatement après transcription\n- Transcriptions : conservées jusqu'à suppression par l'utilisateur\n- Données de compte : conservées jusqu'à suppression du compte\n- Logs techniques : 12 mois maximum"
+      },
+      {
+        "title": "7. Vos droits (RGPD)",
+        "content": "Conformément au RGPD, vous disposez des droits suivants :\n- Droit d'accès : consulter vos données personnelles\n- Droit de rectification : corriger vos données\n- Droit à l'effacement (droit à l'oubli) : supprimer votre compte et toutes vos données\n- Droit à la portabilité : exporter vos données dans un format lisible\n- Droit d'opposition : vous opposer au traitement de vos données\n- Droit à la limitation : restreindre le traitement\n\nPour exercer ces droits, utilisez les options disponibles dans votre profil ou contactez-nous."
+      },
+      {
+        "title": "8. Sécurité des données",
+        "content": "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées :\n- Chiffrement des mots de passe (bcrypt)\n- Connexions HTTPS sécurisées\n- Accès restreint aux données personnelles\n- Suppression automatique des fichiers audio après traitement"
+      },
+      {
+        "title": "9. Transferts internationaux",
+        "content": "Vos données peuvent être transférées vers des serveurs situés en dehors de l'UE pour le traitement IA (OpenAI Whisper). Ces transferts sont encadrés par des clauses contractuelles types conformes au RGPD."
+      },
+      {
+        "title": "10. Contact",
+        "content": "Pour toute question relative à cette politique ou à vos données personnelles :\nEmail : privacy@transcriptflow.com\n\nVous pouvez également déposer une réclamation auprès de la CNIL (Commission Nationale de l'Informatique et des Libertés) : www.cnil.fr"
+      }
+    ]
+  },
+  "terms": {
+    "overline": "Légal",
+    "title": "Conditions d'Utilisation",
+    "lastUpdated": "Dernière mise à jour",
+    "sections": [
+      {
+        "title": "1. Objet",
+        "content": "Les présentes conditions régissent l'utilisation du service TranscriptFlow, un outil de transcription audio propulsé par l'intelligence artificielle."
+      },
+      {
+        "title": "2. Inscription",
+        "content": "L'utilisation du service nécessite la création d'un compte. Vous vous engagez à fournir des informations exactes et à maintenir la confidentialité de vos identifiants."
+      },
+      {
+        "title": "3. Service de transcription",
+        "content": "TranscriptFlow fournit un service de transcription automatique basé sur l'IA. La précision des transcriptions dépend de la qualité audio et n'est pas garantie à 100%."
+      },
+      {
+        "title": "4. Propriété intellectuelle",
+        "content": "Vous restez propriétaire de vos fichiers audio et des transcriptions générées. TranscriptFlow ne revendique aucun droit sur votre contenu."
+      },
+      {
+        "title": "5. Utilisation acceptable",
+        "content": "Vous vous engagez à ne pas utiliser le service pour :\n- Transcrire du contenu illégal ou portant atteinte aux droits d'autrui\n- Surcharger intentionnellement le service\n- Tenter d'accéder à des données d'autres utilisateurs"
+      },
+      {
+        "title": "6. Limitation de responsabilité",
+        "content": "TranscriptFlow ne saurait être tenu responsable des erreurs de transcription, des interruptions de service ou de la perte de données."
+      },
+      {
+        "title": "7. Protection des données",
+        "content": "Le traitement de vos données personnelles est régi par notre Politique de Confidentialité, conforme au RGPD."
+      },
+      {
+        "title": "8. Modification des conditions",
+        "content": "Nous nous réservons le droit de modifier ces conditions. Les utilisateurs seront informés de tout changement significatif."
+      },
+      {
+        "title": "9. Résiliation",
+        "content": "Vous pouvez supprimer votre compte à tout moment. TranscriptFlow se réserve le droit de suspendre ou supprimer un compte en cas de violation des présentes conditions."
+      },
+      {
+        "title": "10. Droit applicable",
+        "content": "Les présentes conditions sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents."
+      }
+    ]
+  },
+  "profile": {
+    "overline": "Mon Compte",
+    "title": "Profil",
+    "personalInfo": "Informations personnelles",
+    "dataRights": "Mes Droits RGPD",
+    "exportData": "Exporter mes données",
+    "exportDataDesc": "Téléchargez toutes vos données personnelles dans un format lisible (JSON).",
+    "exportBtn": "Télécharger mes données",
+    "exporting": "Export en cours...",
+    "exportSuccess": "Données exportées avec succès",
+    "exportFail": "Échec de l'export",
+    "deleteAccount": "Supprimer mon compte",
+    "deleteAccountDesc": "Supprimez définitivement votre compte et toutes vos données. Cette action est irréversible.",
+    "deleteBtn": "Supprimer mon compte",
+    "deleteConfirm": "Êtes-vous sûr ? Cette action supprimera définitivement votre compte et toutes vos transcriptions. Tapez SUPPRIMER pour confirmer.",
+    "deleteConfirmWord": "SUPPRIMER",
+    "deleteSuccess": "Compte supprimé avec succès",
+    "deleteFail": "Échec de la suppression"
+  },
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français",
+    "es": "Espagnol",
+    "de": "Allemand",
+    "it": "Italien",
+    "pt": "Portugais",
+    "ja": "Japonais",
+    "zh": "Chinois",
+    "ko": "Coréen",
+    "ar": "Arabe",
+    "french": "Français",
+    "english": "Anglais",
+    "spanish": "Espagnol",
+    "german": "Allemand",
+    "italian": "Italien",
+    "portuguese": "Portugais",
+    "dutch": "Néerlandais",
+    "russian": "Russe"
+  },
+  "subscription": {
+    "title": "Abonnement",
+    "freeUsage": "Utilisation gratuite",
+    "used": "utilisé",
+    "of": "sur",
+    "unlimited": "Illimité",
+    "limitReached": "Limite atteinte",
+    "limitReachedMsg": "Vous avez atteint votre limite mensuelle gratuite. Abonnez-vous pour continuer.",
+    "subscribePro": "Passer à Pro",
+    "proTitle": "TranscriptFlow Pro",
+    "proDesc": "Transcription illimitée",
+    "perMonth": "/mois",
+    "subscribed": "Abonné",
+    "subscribedMsg": "Vous avez un abonnement actif.",
+    "expiresAt": "Expire le",
+    "cancel": "Annuler l'abonnement",
+    "cancelConfirm": "Êtes-vous sûr de vouloir annuler votre abonnement ?",
+    "cancelled": "Abonnement annulé",
+    "activated": "Abonnement activé avec succès !",
+    "activationFailed": "Échec de l'activation",
+    "features": ["Transcription illimitée", "Traduction illimitée", "Support prioritaire", "Export tous formats"],
+    "remainingTime": "Temps restant"
+  },
+  "adminSettings": {
+    "title": "Paramètres",
+    "subscriptionSection": "Abonnement & Limites",
+    "enableSubscription": "Activer le système d'abonnement",
+    "enabledDesc": "Les utilisateurs gratuits seront limités et pourront s'abonner via PayPal.",
+    "disabledDesc": "Tous les utilisateurs ont un accès illimité.",
+    "freeLimit": "Limite gratuite (secondes)",
+    "freeLimitHelp": "Durée maximale de transcription par mois pour les utilisateurs gratuits.",
+    "monthlyPrice": "Prix mensuel",
+    "yearlyPrice": "Prix annuel",
+    "yearlyEnabled": "Activer le plan annuel",
+    "yearlyEnabledDesc": "Permet aux utilisateurs de choisir un abonnement annuel.",
+    "currency": "Devise",
+    "createPlan": "Créer les plans PayPal",
+    "planCreated": "Plans PayPal créés",
+    "planExists": "Plan PayPal actif",
+    "monthlyPlanId": "Plan mensuel",
+    "yearlyPlanId": "Plan annuel",
+    "saveSettings": "Enregistrer",
+    "saved": "Paramètres enregistrés",
+    "subscriptions": "Abonnements",
+    "noSubscriptions": "Aucun abonnement",
+    "couponsSection": "Coupons de réduction",
+    "couponCode": "Code coupon",
+    "couponDiscount": "Réduction (%)",
+    "couponMaxUses": "Utilisations max",
+    "couponExpires": "Date d'expiration",
+    "couponPlanType": "Type de plan",
+    "couponPlanAll": "Tous",
+    "couponPlanMonthly": "Mensuel",
+    "couponPlanYearly": "Annuel",
+    "addCoupon": "Ajouter un coupon",
+    "couponAdded": "Coupon créé",
+    "couponDeleted": "Coupon supprimé",
+    "couponToggled": "Statut du coupon modifié",
+    "noCoupons": "Aucun coupon",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "uses": "utilisations"
+  },
+  "subscriptionYearly": {
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "perYear": "/an",
+    "savings": "Économie",
+    "couponLabel": "Code promo",
+    "couponPlaceholder": "Entrez un code promo",
+    "applyCoupon": "Appliquer",
+    "couponApplied": "Coupon appliqué",
+    "couponInvalid": "Code promo invalide",
+    "couponExpired": "Ce coupon a expiré",
+    "couponUsed": "Vous avez déjà utilisé ce coupon",
+    "couponFull": "Ce coupon est épuisé",
+    "originalPrice": "Prix original",
+    "discountedPrice": "Prix réduit",
+    "freeAccess": "Accès gratuit activé !",
+    "removeCoupon": "Retirer"
+  }
+}

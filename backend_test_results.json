@@ -1,0 +1,67 @@
+{
+  "summary": {
+    "total_tests": 8,
+    "passed_tests": 7,
+    "failed_tests": 1,
+    "success_rate": "87.5%"
+  },
+  "test_results": [
+    {
+      "test": "Root API endpoint",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "Health check endpoint",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "User registration",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "User login",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "Invalid login (wrong password)",
+      "success": true,
+      "status_code": 401,
+      "expected_status": 401,
+      "message": "Status: 401, Expected: 401"
+    },
+    {
+      "test": "Get current user (protected)",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "Admin login",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "Protected endpoint without auth",
+      "success": false,
+      "status_code": 403,
+      "expected_status": 401,
+      "message": "Status: 403, Expected: 401, Response: {'detail': 'Not authenticated'}"
+    }
+  ],
+  "timestamp": "2026-03-30T15:45:02.092397"
+}

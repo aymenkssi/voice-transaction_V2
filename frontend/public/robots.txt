@@ -1,0 +1,15 @@
+# robots.txt for TranscriptFlow
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /profile
+Disallow: /transcription/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://transcriptflow.com/sitemap.xml
+
+# Crawl delay
+User-agent: *
+Crawl-delay: 1

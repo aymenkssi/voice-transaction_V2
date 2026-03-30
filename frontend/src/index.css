@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Lora:wght@400;500&family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 50 10% 97%;
+        --foreground: 0 0% 7%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 7%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 7%;
+        --primary: 0 0% 7%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 50 7% 90%;
+        --secondary-foreground: 0 0% 7%;
+        --muted: 50 7% 90%;
+        --muted-foreground: 50 3% 43%;
+        --accent: 32 10% 50%;
+        --accent-foreground: 0 0% 100%;
+        --destructive: 0 30% 30%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 50 7% 90%;
+        --input: 50 7% 90%;
+        --ring: 0 0% 7%;
+        --radius: 0rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-stele-border;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        @apply bg-stele-bg text-stele-primary font-inter antialiased;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-playfair tracking-tight;
+    }
+}
+
+@layer components {
+    .btn-stele {
+        @apply bg-stele-primary text-white px-8 py-4 font-inter text-sm tracking-widest uppercase hover:bg-stele-accent transition-colors duration-300 border border-stele-primary hover:border-stele-accent;
+    }
+    
+    .btn-stele-outline {
+        @apply bg-transparent text-stele-primary px-8 py-4 font-inter text-sm tracking-widest uppercase border border-stele-secondary hover:border-stele-primary transition-colors duration-300;
+    }
+    
+    .card-stele {
+        @apply bg-white border border-stele-secondary p-8 md:p-12 transition-all duration-500 hover:border-stele-primary;
+    }
+    
+    .input-stele {
+        @apply bg-transparent border-b border-stele-secondary pb-3 px-0 focus:outline-none focus:border-stele-primary focus:ring-0 font-inter placeholder:text-stele-muted transition-colors duration-300;
+    }
+    
+    .overline {
+        @apply font-inter text-xs tracking-[0.2em] uppercase font-medium text-stele-accent;
+    }
+    
+    .file-upload-area {
+        @apply border border-stele-secondary bg-white p-16 text-center cursor-pointer hover:border-stele-primary transition-colors duration-500 flex flex-col items-center justify-center gap-4;
+    }
+    
+    .transcript-text {
+        @apply font-lora text-lg md:text-xl text-stele-primary leading-loose;
+    }
+    
+    .timestamp {
+        @apply text-xs font-mono text-stele-accent cursor-pointer hover:text-stele-primary mr-2 select-none transition-colors;
+    }
+}
+
+@layer utilities {
+    .animate-delay-100 {
+        animation-delay: 100ms;
+    }
+    .animate-delay-200 {
+        animation-delay: 200ms;
+    }
+    .animate-delay-300 {
+        animation-delay: 300ms;
+    }
+    .animate-delay-400 {
+        animation-delay: 400ms;
+    }
+    .animate-delay-500 {
+        animation-delay: 500ms;
+    }
+}
+
+/* Custom scrollbar - Stèle aesthetic */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F8F8F6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E5E5E0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8C8273;
+}
+
+/* Selection */
+::selection {
+    background-color: rgba(140, 130, 115, 0.2);
+    color: #111111;
+}
