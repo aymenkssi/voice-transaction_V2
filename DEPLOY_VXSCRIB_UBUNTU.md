@@ -49,8 +49,7 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Installer yt-dlp pour la transcription URL
-pip install yt-dlp
+# Note: Le premier lancement téléchargera le modèle Whisper (~140MB pour 'base')
 ```
 
 ### Créer le fichier `.env`
@@ -60,18 +59,22 @@ cat > .env << 'EOF'
 MONGO_URL=mongodb://localhost:27017
 DB_NAME=vxscrib
 CORS_ORIGINS=*
-EMERGENT_LLM_KEY=VOTRE_CLE_OPENAI_OU_EMERGENT
+WHISPER_MODEL=base
+JWT_SECRET=VOTRE_SECRET_JWT_ALEATOIRE_32_CHARS
 PAYPAL_CLIENT_ID=VOTRE_PAYPAL_CLIENT_ID
 PAYPAL_SECRET=VOTRE_PAYPAL_SECRET
 PAYPAL_MODE=live
-JWT_SECRET=VOTRE_SECRET_JWT_ALEATOIRE_32_CHARS
 EOF
 ```
 
 > **Important :**
-> - Remplacez `VOTRE_CLE_OPENAI_OU_EMERGENT` par votre clé API OpenAI (pour Whisper)
-> - Remplacez `VOTRE_PAYPAL_CLIENT_ID` et `VOTRE_PAYPAL_SECRET` par vos identifiants PayPal Live
+> - `WHISPER_MODEL` : Choisissez le modèle selon vos ressources :
+>   - `tiny` : Très rapide, ~1GB RAM, qualité basique
+>   - `base` : Bon équilibre (recommandé), ~2GB RAM
+>   - `small` : Meilleure qualité, ~4GB RAM, plus lent
+>   - `medium` : Haute qualité, ~8GB RAM, lent
 > - Générez un JWT_SECRET aléatoire : `openssl rand -hex 32`
+> - **Pas besoin de clé API OpenAI** - Whisper tourne en local gratuitement !
 
 ### Créer le dossier uploads
 

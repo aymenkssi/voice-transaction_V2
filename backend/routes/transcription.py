@@ -114,46 +114,62 @@ async def user_has_active_subscription(user_id: str) -> bool:
 
 
 async def process_transcription(transcription_id: str, file_path: str):
-    from emergentintegrations.llm.openai import OpenAISpeechToText
+    """Process transcription using local Whisper model (FREE)"""
+    import whisper
+    import asyncio
+    
     try:
         await db.transcriptions.update_one(
             {"id": transcription_id},
             {"$set": {"progress": 10, "updated_at": datetime.now(timezone.utc).isoformat()}}
         )
-        api_key = os.environ.get('EMERGENT_LLM_KEY')
-        stt = OpenAISpeechToText(api_key=api_key)
+        
+        # Load Whisper model (base = good balance between speed and quality)
+        # Options: tiny, base, small, medium, large
+        model_name = os.environ.get('WHISPER_MODEL', 'base')
+        logger.info(f"Loading Whisper model: {model_name}")
+        
         await db.transcriptions.update_one(
             {"id": transcription_id},
-            {"$set": {"progress": 30, "updated_at": datetime.now(timezone.utc).isoformat()}}
+            {"$set": {"progress": 20, "updated_at": datetime.now(timezone.utc).isoformat()}}
         )
-        with open(file_path, "rb") as audio_file:
-            response = await stt.transcribe(
-                file=audio_file, model="whisper-1",
-                response_format="verbose_json", timestamp_granularities=["segment"]
-            )
+        
+        # Run Whisper in thread pool to not block async loop
+        def run_whisper():
+            model = whisper.load_model(model_name)
+            result = model.transcribe(file_path, verbose=False)
+            return result
+        
+        loop = asyncio.get_event_loop()
+        response = await loop.run_in_executor(None, run_whisper)
+        
         await db.transcriptions.update_one(
             {"id": transcription_id},
             {"$set": {"progress": 80, "updated_at": datetime.now(timezone.utc).isoformat()}}
         )
-        transcribed_text = response.text
-        detected_language = getattr(response, 'language', None)
-        duration = getattr(response, 'duration', None)
+        
+        transcribed_text = response.get('text', '')
+        detected_language = response.get('language', None)
+        segments = response.get('segments', [])
+        
+        # Calculate duration from segments
+        duration = None
+        if segments:
+            duration = segments[-1].get('end', 0)
+        
+        # Format with timestamps
         formatted_text = transcribed_text
-        segments = getattr(response, 'segments', None)
         if segments:
             formatted_lines = []
             for segment in segments:
-                if isinstance(segment, dict):
-                    start_val = segment.get('start', 0)
-                    text_val = segment.get('text', '').strip()
-                else:
-                    start_val = getattr(segment, 'start', 0)
-                    text_val = getattr(segment, 'text', '').strip()
+                start_val = segment.get('start', 0)
+                text_val = segment.get('text', '').strip()
                 start_time = format_timestamp(start_val)
                 if text_val:
                     formatted_lines.append(f"[{start_time}] {text_val}")
             if formatted_lines:
                 formatted_text = "\n".join(formatted_lines)
+        
         await db.transcriptions.update_one(
             {"id": transcription_id},
             {"$set": {
@@ -332,8 +348,9 @@ async def download_audio_from_url(url: str, output_path: str) -> dict:
 
 
 async def process_url_transcription(transcription_id: str, url: str, file_path: str):
-    """Download video, extract audio, and transcribe"""
-    from emergentintegrations.llm.openai import OpenAISpeechToText
+    """Download video, extract audio, and transcribe using local Whisper (FREE)"""
+    import whisper
+    import asyncio
     
     try:
         # Update progress - downloading
@@ -360,41 +377,45 @@ async def process_url_transcription(transcription_id: str, url: str, file_path: 
         if not os.path.exists(file_path):
             raise Exception("Audio file not created")
         
-        # Transcribe
-        api_key = os.environ.get('EMERGENT_LLM_KEY')
-        stt = OpenAISpeechToText(api_key=api_key)
+        # Transcribe with local Whisper
+        model_name = os.environ.get('WHISPER_MODEL', 'base')
+        logger.info(f"Loading Whisper model: {model_name}")
         
         await db.transcriptions.update_one(
             {"id": transcription_id},
             {"$set": {"progress": 50, "updated_at": datetime.now(timezone.utc).isoformat()}}
         )
         
-        with open(file_path, "rb") as audio_file:
-            response = await stt.transcribe(
-                file=audio_file, model="whisper-1",
-                response_format="verbose_json", timestamp_granularities=["segment"]
-            )
+        # Run Whisper in thread pool to not block async loop
+        def run_whisper():
+            model = whisper.load_model(model_name)
+            result = model.transcribe(file_path, verbose=False)
+            return result
+        
+        loop = asyncio.get_event_loop()
+        response = await loop.run_in_executor(None, run_whisper)
         
         await db.transcriptions.update_one(
             {"id": transcription_id},
             {"$set": {"progress": 80, "updated_at": datetime.now(timezone.utc).isoformat()}}
         )
         
-        transcribed_text = response.text
-        detected_language = getattr(response, 'language', None)
-        duration = getattr(response, 'duration', None) or video_info.get('duration')
+        transcribed_text = response.get('text', '')
+        detected_language = response.get('language', None)
+        segments = response.get('segments', [])
         
+        # Calculate duration from segments or use video info
+        duration = video_info.get('duration')
+        if segments and not duration:
+            duration = segments[-1].get('end', 0)
+        
+        # Format with timestamps
         formatted_text = transcribed_text
-        segments = getattr(response, 'segments', None)
         if segments:
             formatted_lines = []
             for segment in segments:
-                if isinstance(segment, dict):
-                    start_val = segment.get('start', 0)
-                    text_val = segment.get('text', '').strip()
-                else:
-                    start_val = getattr(segment, 'start', 0)
-                    text_val = getattr(segment, 'text', '').strip()
+                start_val = segment.get('start', 0)
+                text_val = segment.get('text', '').strip()
                 start_time = format_timestamp(start_val)
                 if text_val:
                     formatted_lines.append(f"[{start_time}] {text_val}")
