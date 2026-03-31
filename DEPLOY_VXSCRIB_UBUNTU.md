@@ -1,49 +1,18 @@
 # Guide de déploiement — VxScrib
 ## VM Ubuntu 24.04 (Noble Numbat) — Sans nom de domaine
 
-> L'application sera accessible via `http://<IP_DE_VOTRE_VM>`
+> ⚠️ **Note importante** : MockExamCenter utilise déjà le port 80.
+> VxScrib sera accessible via `http://<IP_DE_VOTRE_VM>:8080`
 
 ---
 
 ## 1. Prérequis système
 
-```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y curl git build-essential nginx ffmpeg
-```
-
-### Installer Node.js 20
+Les prérequis sont déjà installés avec MockExamCenter. Vérifiez juste ffmpeg :
 
 ```bash
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs
-node -v  # v20.x
-```
-
-### Installer Python 3.11+ et pip
-
-```bash
-sudo apt install -y python3 python3-pip python3-venv
-python3 --version  # 3.11+
-```
-
-### Installer MongoDB 7
-
-```bash
-curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
-echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
-
-sudo apt update
-sudo apt install -y mongodb-org
-sudo systemctl start mongod
-sudo systemctl enable mongod
-sudo systemctl status mongod  # Doit afficher "active (running)"
-```
-
-### Installer Yarn
-
-```bash
-sudo npm install -g yarn
+sudo apt install -y ffmpeg
+ffmpeg -version
 ```
 
 ---
@@ -115,7 +84,7 @@ chmod 755 /opt/vxscrib/backend/uploads
 
 ```bash
 source venv/bin/activate
-uvicorn server:app --host 0.0.0.0 --port 8001
+uvicorn server:app --host 0.0.0.0 --port 8002
 # Ctrl+C pour arrêter après avoir vérifié que ça démarre sans erreur
 ```
 
@@ -134,11 +103,11 @@ yarn install
 
 ```bash
 cat > .env << 'EOF'
-REACT_APP_BACKEND_URL=http://IP_DE_VOTRE_VM
+REACT_APP_BACKEND_URL=http://IP_DE_VOTRE_VM:8080
 EOF
 ```
 
-> Remplacez `IP_DE_VOTRE_VM` par l'adresse IP réelle de votre serveur (ex: `http://192.168.1.50`).
+> Remplacez `IP_DE_VOTRE_VM` par l'adresse IP réelle de votre serveur (ex: `http://192.168.1.50:8080`).
 
 ### Compiler le frontend (build de production)
 
@@ -152,9 +121,11 @@ Le dossier `build/` contient les fichiers statiques prêts à servir.
 
 ## 5. Configurer Nginx (reverse proxy)
 
+> ⚠️ **Important** : Ne pas modifier la config de MockExamCenter ! On crée une config séparée sur le port 8080.
+
 Nginx va :
-- Servir le frontend (fichiers statiques) sur le port 80
-- Rediriger les requêtes `/api/*` vers le backend (port 8001)
+- Servir le frontend VxScrib sur le port **8080**
+- Rediriger les requêtes `/api/*` vers le backend VxScrib (port 8002)
 
 ```bash
 sudo nano /etc/nginx/sites-available/vxscrib
@@ -164,7 +135,7 @@ Collez cette configuration :
 
 ```nginx
 server {
-    listen 80;
+    listen 8080;
     server_name _;
 
     client_max_body_size 50M;  # Pour les uploads de fichiers audio
@@ -179,7 +150,7 @@ server {
 
     # Backend — reverse proxy
     location /api/ {
-        proxy_pass http://127.0.0.1:8001/api/;
+        proxy_pass http://127.0.0.1:8002/api/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -194,15 +165,15 @@ Activer le site :
 
 ```bash
 sudo ln -sf /etc/nginx/sites-available/vxscrib /etc/nginx/sites-enabled/
-sudo rm -f /etc/nginx/sites-enabled/default
 sudo nginx -t  # Vérifier la syntaxe
 sudo systemctl restart nginx
-sudo systemctl enable nginx
 ```
 
 ---
 
 ## 6. Lancer le backend en service (systemd)
+
+> ⚠️ **Note** : Le backend VxScrib utilise le port **8002** (MockExamCenter utilise 8001)
 
 Créer un service pour que le backend démarre automatiquement :
 
@@ -223,7 +194,7 @@ Type=simple
 User=root
 WorkingDirectory=/opt/vxscrib/backend
 Environment=PATH=/opt/vxscrib/backend/venv/bin:/usr/bin
-ExecStart=/opt/vxscrib/backend/venv/bin/uvicorn server:app --host 0.0.0.0 --port 8001
+ExecStart=/opt/vxscrib/backend/venv/bin/uvicorn server:app --host 0.0.0.0 --port 8002
 Restart=always
 RestartSec=5
 
@@ -245,9 +216,8 @@ sudo systemctl status vxscrib-backend  # Doit être "active (running)"
 ## 7. Ouvrir le pare-feu
 
 ```bash
-sudo ufw allow 80/tcp
-sudo ufw allow ssh
-sudo ufw enable
+sudo ufw allow 8080/tcp
+sudo ufw status
 ```
 
 ---
@@ -255,20 +225,23 @@ sudo ufw enable
 ## 8. Vérifier le déploiement
 
 ```bash
-# Tester le backend
-curl http://localhost:8001/api/
+# Tester le backend VxScrib (port 8002)
+curl http://localhost:8002/api/
 # Doit retourner : {"message":"VxScrib API","version":"2.0.0"}
 
-# Tester via Nginx
-curl http://localhost/api/
+# Tester via Nginx (port 8080)
+curl http://localhost:8080/api/
 # Même résultat
 
 # Tester le frontend
-curl -s http://localhost | head -5
+curl -s http://localhost:8080 | head -5
 # Doit retourner du HTML
+
+# Vérifier que MockExamCenter fonctionne toujours (port 80)
+curl http://localhost/api/exams
 ```
 
-Ouvrez un navigateur et allez sur : **http://IP_DE_VOTRE_VM**
+Ouvrez un navigateur et allez sur : **http://IP_DE_VOTRE_VM:8080**
 
 ---
 
@@ -331,6 +304,7 @@ Configurez :
 | Console MongoDB | `mongosh --eval "use vxscrib"` |
 | Vérifier l'espace uploads | `du -sh /opt/vxscrib/backend/uploads` |
 | Nettoyer les fichiers temporaires | `rm -rf /opt/vxscrib/backend/uploads/*` |
+| Vérifier les services actifs | `sudo systemctl status vxscrib-backend mockexamcenter-backend` |
 
 ---
 
@@ -357,31 +331,43 @@ sudo systemctl restart nginx
 
 ---
 
-## Résumé de l'architecture
+## Résumé de l'architecture (2 applications sur le même serveur)
 
 ```
-Client (navigateur)
-        │
-        ▼ port 80
-┌─────────────────────────┐
-│        Nginx            │
-│   /     → build/        │  ← fichiers statiques React
-│   /api/* → :8001        │  ← reverse proxy vers FastAPI
-└─────────────────────────┘
-        │
-        ▼ port 8001
-┌─────────────────────────┐
-│   FastAPI (uvicorn)     │
-│      server.py          │
-│  + yt-dlp (vidéos)      │
-│  + Whisper (transcription)│
-└─────────────────────────┘
-        │
-        ▼ port 27017
-┌─────────────────────────┐
-│       MongoDB           │
-└─────────────────────────┘
+                    Client (navigateur)
+                           │
+         ┌─────────────────┴─────────────────┐
+         │                                   │
+         ▼ port 80                           ▼ port 8080
+┌─────────────────────┐             ┌─────────────────────┐
+│   MockExamCenter    │             │      VxScrib        │
+│       Nginx         │             │       Nginx         │
+│   /api/* → :8001    │             │   /api/* → :8002    │
+└─────────────────────┘             └─────────────────────┘
+         │                                   │
+         ▼ port 8001                         ▼ port 8002
+┌─────────────────────┐             ┌─────────────────────┐
+│  MockExamCenter     │             │     VxScrib         │
+│  FastAPI Backend    │             │  FastAPI Backend    │
+└─────────────────────┘             └─────────────────────┘
+         │                                   │
+         └─────────────┬─────────────────────┘
+                       │
+                       ▼ port 27017
+              ┌─────────────────────┐
+              │      MongoDB        │
+              │  (base partagée)    │
+              │  - mockexamcenter   │
+              │  - vxscrib          │
+              └─────────────────────┘
 ```
+
+### Ports utilisés
+
+| Application | Frontend (Nginx) | Backend (FastAPI) | Base de données |
+|---|---|---|---|
+| MockExamCenter | 80 | 8001 | mockexamcenter |
+| VxScrib | 8080 | 8002 | vxscrib |
 
 ---
 
@@ -416,10 +402,20 @@ sudo journalctl -u mongod -n 20
 
 ### Erreur 502 Bad Gateway
 ```bash
-# Vérifier que le backend tourne
-curl http://localhost:8001/api/
+# Vérifier que le backend VxScrib tourne sur le bon port (8002)
+curl http://localhost:8002/api/
 # Si ça ne répond pas, redémarrer
 sudo systemctl restart vxscrib-backend
+```
+
+### Conflit avec MockExamCenter
+```bash
+# Vérifier que les deux applications sont sur des ports différents
+sudo netstat -tlnp | grep -E "80|8001|8002|8080"
+# Doit montrer :
+# - nginx sur 80 et 8080
+# - mockexamcenter-backend sur 8001
+# - vxscrib-backend sur 8002
 ```
 
 ### Transcription URL échoue
