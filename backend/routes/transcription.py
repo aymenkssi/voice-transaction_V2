@@ -165,10 +165,13 @@ async def process_transcription(transcription_id: str, file_path: str):
                 "updated_at": datetime.now(timezone.utc).isoformat()
             }}
         )
+        # Delete audio file after transcription
         try:
-            os.remove(file_path)
-        except:
-            pass
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"Deleted audio file: {file_path}")
+        except Exception as cleanup_error:
+            logger.warning(f"Failed to delete audio file {file_path}: {cleanup_error}")
         logger.info(f"Transcription {transcription_id} completed successfully")
     except Exception as e:
         logger.error(f"Transcription {transcription_id} failed: {str(e)}")
@@ -180,10 +183,13 @@ async def process_transcription(transcription_id: str, file_path: str):
                 "updated_at": datetime.now(timezone.utc).isoformat()
             }}
         )
+        # Delete audio file on failure too
         try:
-            os.remove(file_path)
-        except:
-            pass
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"Deleted audio file after failure: {file_path}")
+        except Exception as cleanup_error:
+            logger.warning(f"Failed to delete audio file {file_path}: {cleanup_error}")
 
 
 def extract_video_title(url: str) -> str:
@@ -407,11 +413,13 @@ async def process_url_transcription(transcription_id: str, url: str, file_path: 
             }}
         )
         
-        # Cleanup
+        # Cleanup - delete audio file after transcription
         try:
-            os.remove(file_path)
-        except:
-            pass
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"Deleted audio file: {file_path}")
+        except Exception as cleanup_error:
+            logger.warning(f"Failed to delete audio file {file_path}: {cleanup_error}")
             
         logger.info(f"URL Transcription {transcription_id} completed successfully")
         
@@ -426,10 +434,13 @@ async def process_url_transcription(transcription_id: str, url: str, file_path: 
                 "updated_at": datetime.now(timezone.utc).isoformat()
             }}
         )
+        # Cleanup on failure too
         try:
-            os.remove(file_path)
-        except:
-            pass
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"Deleted audio file after failure: {file_path}")
+        except Exception as cleanup_error:
+            logger.warning(f"Failed to delete audio file {file_path}: {cleanup_error}")
 
 
 # ================= ROUTES =================
