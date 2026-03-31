@@ -1,9 +1,9 @@
 {
   "summary": {
-    "total_tests": 10,
-    "passed_tests": 9,
+    "total_tests": 18,
+    "passed_tests": 17,
     "failed_tests": 1,
-    "success_rate": "90.0%"
+    "success_rate": "94.4%"
   },
   "test_results": [
     {
@@ -75,7 +75,63 @@
       "status_code": 403,
       "expected_status": 401,
       "message": "Status: 403, Expected: 401, Response: {'detail': 'Not authenticated'}"
+    },
+    {
+      "test": "Get subscription status",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "URL transcription - Regular user (403 expected)",
+      "success": true,
+      "status_code": 403,
+      "expected_status": 403,
+      "message": "Status: 403, Expected: 403"
+    },
+    {
+      "test": "Admin login for URL test",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "URL transcription - Admin user (should start download)",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "URL transcription - Invalid URL format",
+      "success": true,
+      "status_code": 400,
+      "expected_status": 400,
+      "message": "Status: 400, Expected: 400"
+    },
+    {
+      "test": "URL transcription - Unsupported platform",
+      "success": true,
+      "status_code": 400,
+      "expected_status": 400,
+      "message": "Status: 400, Expected: 400"
+    },
+    {
+      "test": "URL transcription - Empty URL",
+      "success": true,
+      "status_code": 400,
+      "expected_status": 400,
+      "message": "Status: 400, Expected: 400"
+    },
+    {
+      "test": "Get transcriptions list",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
     }
   ],
-  "timestamp": "2026-03-31T08:37:44.060883"
+  "timestamp": "2026-03-31T09:30:49.287816"
 }

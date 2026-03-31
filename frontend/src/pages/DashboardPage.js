@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 import {
   Mic2, Upload, FileAudio, Clock, Globe, Check,
   AlertCircle, Trash2, Eye, User, LogOut,
-  Loader2, MoreVertical, Mic, Home, ArrowRight, Shield
+  Loader2, MoreVertical, Mic, Home, ArrowRight, Shield, Link2, Crown, Download
 } from 'lucide-react';
 import AudioRecorder from '../components/AudioRecorder';
 import SubscriptionPanel from '../components/SubscriptionPanel';
@@ -32,6 +32,16 @@ const DashboardPage = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [dragActive, setDragActive] = useState(false);
   const [activeTab, setActiveTab] = useState('upload');
+  const [videoUrl, setVideoUrl] = useState('');
+  const [urlLoading, setUrlLoading] = useState(false);
+  const [hasSubscription, setHasSubscription] = useState(false);
+
+  const checkSubscription = useCallback(async () => {
+    try {
+      const res = await axios.get(`${API}/subscription/status`, { headers: getAuthHeader() });
+      setHasSubscription(res.data.has_subscription || user?.is_admin);
+    } catch { setHasSubscription(user?.is_admin || false); }
+  }, [getAuthHeader, user]);
 
   const fetchTranscriptions = useCallback(async () => {
     try {
@@ -43,11 +53,32 @@ const DashboardPage = () => {
 
   useEffect(() => {
     fetchTranscriptions();
+    checkSubscription();
     const interval = setInterval(() => {
-      if (transcriptions.some(t => t.status === 'processing')) fetchTranscriptions();
+      if (transcriptions.some(t => t.status === 'processing' || t.status === 'downloading')) fetchTranscriptions();
     }, 3000);
     return () => clearInterval(interval);
-  }, [fetchTranscriptions, transcriptions]);
+  }, [fetchTranscriptions, checkSubscription, transcriptions]);
+
+  const handleUrlTranscribe = async () => {
+    if (!videoUrl.trim()) {
+      toast.error(t('dashboard.urlInvalid'));
+      return;
+    }
+    
+    setUrlLoading(true);
+    try {
+      await axios.post(`${API}/transcriptions/url`, { url: videoUrl }, { headers: getAuthHeader() });
+      toast.success(t('dashboard.urlSuccess'));
+      setVideoUrl('');
+      fetchTranscriptions();
+    } catch (error) {
+      const detail = error.response?.data?.detail || t('dashboard.urlFail');
+      toast.error(detail);
+    } finally {
+      setUrlLoading(false);
+    }
+  };
 
   const handleDrag = (e) => { e.preventDefault(); e.stopPropagation(); setDragActive(e.type === 'dragenter' || e.type === 'dragover'); };
   const handleDrop = (e) => {
@@ -118,6 +149,7 @@ const DashboardPage = () => {
 
   const getStatusBadge = (status, progress) => {
     switch (status) {
+      case 'downloading': return (<div className="flex items-center gap-2"><Download className="w-3.5 h-3.5 text-stele-accent animate-pulse" strokeWidth={1.5} /><span className="font-mono text-xs tracking-wider text-stele-accent">{t('dashboard.statusDownloading')}</span></div>);
       case 'processing': return (<div className="flex items-center gap-2"><Loader2 className="w-3.5 h-3.5 text-stele-accent animate-spin" strokeWidth={1.5} /><span className="font-mono text-xs tracking-wider text-stele-accent">{progress}%</span></div>);
       case 'completed': return (<div className="flex items-center gap-1.5 text-stele-success"><Check className="w-3.5 h-3.5" strokeWidth={1.5} /><span className="font-mono text-xs tracking-wider">{t('dashboard.statusCompleted')}</span></div>);
       case 'failed': return (<div className="flex items-center gap-1.5 text-stele-error"><AlertCircle className="w-3.5 h-3.5" strokeWidth={1.5} /><span className="font-mono text-xs tracking-wider">{t('dashboard.statusFailed')}</span></div>);
@@ -178,6 +210,11 @@ const DashboardPage = () => {
             className={`flex items-center gap-2 px-6 py-4 font-inter text-sm tracking-wider transition-colors duration-300 border-b-2 -mb-px ${activeTab === 'record' ? 'border-stele-primary text-stele-primary' : 'border-transparent text-stele-muted hover:text-stele-primary'}`}>
             <Mic className="w-4 h-4" strokeWidth={1.5} />{t('dashboard.recordTab')}
           </button>
+          <button onClick={() => setActiveTab('url')} data-testid="url-tab"
+            className={`flex items-center gap-2 px-6 py-4 font-inter text-sm tracking-wider transition-colors duration-300 border-b-2 -mb-px ${activeTab === 'url' ? 'border-stele-primary text-stele-primary' : 'border-transparent text-stele-muted hover:text-stele-primary'}`}>
+            <Link2 className="w-4 h-4" strokeWidth={1.5} />{t('dashboard.urlTab')}
+            <Crown className="w-3 h-3 text-amber-500" strokeWidth={2} />
+          </button>
         </div>
 
         {activeTab === 'upload' && (
@@ -204,6 +241,65 @@ const DashboardPage = () => {
         )}
 
         {activeTab === 'record' && <div className="mb-12"><AudioRecorder onRecordingComplete={handleFileUpload} disabled={uploading} /></div>}
+
+        {activeTab === 'url' && (
+          <div className="mb-12">
+            {hasSubscription ? (
+              <div className="border border-stele-secondary bg-white p-8 md:p-12">
+                <div className="flex items-center gap-3 mb-6">
+                  <Link2 className="w-6 h-6 text-stele-accent" strokeWidth={1.5} />
+                  <div>
+                    <h3 className="font-manrope font-semibold text-lg text-stele-primary">{t('dashboard.urlTitle')}</h3>
+                    <p className="font-inter text-sm text-stele-muted">{t('dashboard.urlSubtitle')}</p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="url"
+                    value={videoUrl}
+                    onChange={(e) => setVideoUrl(e.target.value)}
+                    placeholder={t('dashboard.urlPlaceholder')}
+                    className="flex-1 input-stele border border-stele-secondary px-4 py-3 font-inter text-sm"
+                    data-testid="video-url-input"
+                    disabled={urlLoading}
+                  />
+                  <button
+                    onClick={handleUrlTranscribe}
+                    disabled={urlLoading || !videoUrl.trim()}
+                    className="btn-stele text-xs px-8 py-3 flex items-center justify-center gap-2 disabled:opacity-50"
+                    data-testid="url-transcribe-btn"
+                  >
+                    {urlLoading ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />{t('dashboard.urlTranscribing')}</>
+                    ) : (
+                      <><Link2 className="w-4 h-4" strokeWidth={1.5} />{t('dashboard.urlTranscribe')}</>
+                    )}
+                  </button>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {['YouTube', 'TikTok', 'Instagram', 'Twitter/X', 'Facebook', 'Vimeo', 'Twitch'].map(platform => (
+                    <span key={platform} className="px-3 py-1 bg-stele-bg text-stele-muted font-mono text-[10px] tracking-wider">
+                      {platform}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="border border-amber-200 bg-amber-50 p-8 md:p-12 text-center">
+                <Crown className="w-10 h-10 mx-auto text-amber-500 mb-4" strokeWidth={1.5} />
+                <h3 className="font-playfair text-xl text-stele-primary mb-2">{t('dashboard.urlPremium')}</h3>
+                <p className="font-inter text-sm text-stele-muted mb-6 max-w-md mx-auto">{t('dashboard.urlPremiumDesc')}</p>
+                <button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="btn-stele text-xs px-8 py-3"
+                  data-testid="url-subscribe-btn"
+                >
+                  {t('dashboard.urlSubscribe')}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className="mb-8">
           <div className="flex items-end justify-between">

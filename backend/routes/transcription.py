@@ -8,6 +8,9 @@ import uuid
 import os
 import aiofiles
 import logging
+import asyncio
+import subprocess
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +44,7 @@ class TranscriptionResponse(BaseModel):
     detected_language: Optional[str] = None
     translated_text: Optional[str] = None
     translation_language: Optional[str] = None
+    source_url: Optional[str] = None
     status: str
     progress: int
     duration_seconds: Optional[float] = None
@@ -53,6 +57,8 @@ class TranscriptionUpdate(BaseModel):
 class TranslationRequest(BaseModel):
     target_language: str
 
+class URLTranscriptionRequest(BaseModel):
+    url: str
 
 # ================= HELPERS =================
 
@@ -180,6 +186,252 @@ async def process_transcription(transcription_id: str, file_path: str):
             pass
 
 
+def extract_video_title(url: str) -> str:
+    """Extract a clean title from video URL"""
+    # Common patterns for video platforms
+    if 'youtube.com' in url or 'youtu.be' in url:
+        return "YouTube Video"
+    elif 'tiktok.com' in url:
+        return "TikTok Video"
+    elif 'instagram.com' in url:
+        return "Instagram Video"
+    elif 'twitter.com' in url or 'x.com' in url:
+        return "Twitter/X Video"
+    elif 'facebook.com' in url or 'fb.watch' in url:
+        return "Facebook Video"
+    elif 'vimeo.com' in url:
+        return "Vimeo Video"
+    elif 'twitch.tv' in url:
+        return "Twitch Video"
+    elif 'linkedin.com' in url:
+        return "LinkedIn Video"
+    else:
+        return "Video URL"
+
+
+def is_valid_video_url(url: str) -> bool:
+    """Check if URL is from a supported platform"""
+    supported_patterns = [
+        r'(youtube\.com|youtu\.be)',
+        r'tiktok\.com',
+        r'instagram\.com',
+        r'(twitter\.com|x\.com)',
+        r'(facebook\.com|fb\.watch)',
+        r'vimeo\.com',
+        r'twitch\.tv',
+        r'linkedin\.com',
+        r'dailymotion\.com',
+        r'soundcloud\.com'
+    ]
+    for pattern in supported_patterns:
+        if re.search(pattern, url, re.IGNORECASE):
+            return True
+    return False
+
+
+async def download_audio_from_url(url: str, output_path: str) -> dict:
+    """Download audio from video URL using yt-dlp"""
+    try:
+        # Find yt-dlp path
+        import shutil
+        import glob as glob_module
+        yt_dlp_path = shutil.which('yt-dlp') or '/root/.venv/bin/yt-dlp'
+        
+        # Remove .mp3 extension as yt-dlp will add it
+        base_path = output_path.replace('.mp3', '')
+        
+        logger.info(f"Downloading audio from {url} to {output_path}")
+        
+        # First, get video info (title, duration)
+        info_cmd = [
+            yt_dlp_path,
+            '--print', 'title',
+            '--print', 'duration',
+            '--no-download',
+            url
+        ]
+        
+        info_process = await asyncio.create_subprocess_exec(
+            *info_cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+        info_stdout, info_stderr = await asyncio.wait_for(info_process.communicate(), timeout=60)
+        
+        output_lines = info_stdout.decode().strip().split('\n')
+        title = output_lines[0] if len(output_lines) > 0 else extract_video_title(url)
+        duration = None
+        try:
+            duration = float(output_lines[1]) if len(output_lines) > 1 else None
+        except:
+            pass
+        
+        logger.info(f"Video info: title={title}, duration={duration}")
+        
+        # Now download the audio
+        download_cmd = [
+            yt_dlp_path,
+            '-x',  # Extract audio
+            '--audio-format', 'mp3',
+            '--audio-quality', '192K',
+            '-o', f'{base_path}.%(ext)s',
+            '--no-playlist',
+            '--max-filesize', '50M',
+            '--socket-timeout', '30',
+            '--retries', '3',
+            url
+        ]
+        
+        logger.info(f"Running download command: {' '.join(download_cmd)}")
+        
+        process = await asyncio.create_subprocess_exec(
+            *download_cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE
+        )
+        stdout, stderr = await asyncio.wait_for(process.communicate(), timeout=300)
+        
+        logger.info(f"Download return code: {process.returncode}")
+        if stderr:
+            logger.info(f"Download stderr: {stderr.decode()[:500]}")
+        
+        if process.returncode != 0:
+            error_msg = stderr.decode() if stderr else "Unknown error"
+            raise Exception(f"Download failed: {error_msg}")
+        
+        # Find the downloaded file
+        possible_files = glob_module.glob(f'{base_path}.*')
+        logger.info(f"Looking for files matching {base_path}.* - Found: {possible_files}")
+        
+        if possible_files:
+            actual_file = possible_files[0]
+            # Rename to expected output path if needed
+            if actual_file != output_path:
+                logger.info(f"Renaming {actual_file} to {output_path}")
+                os.rename(actual_file, output_path)
+        else:
+            # Also check in the directory
+            upload_dir = os.path.dirname(output_path)
+            all_files = os.listdir(upload_dir)
+            logger.info(f"All files in {upload_dir}: {all_files}")
+            raise Exception("Audio file not found after download")
+        
+        return {"title": title, "duration": duration}
+        
+    except asyncio.TimeoutError:
+        raise Exception("Download timeout - video too long or slow connection")
+    except Exception as e:
+        logger.error(f"Download error: {str(e)}")
+        raise Exception(f"Failed to download audio: {str(e)}")
+
+
+async def process_url_transcription(transcription_id: str, url: str, file_path: str):
+    """Download video, extract audio, and transcribe"""
+    from emergentintegrations.llm.openai import OpenAISpeechToText
+    
+    try:
+        # Update progress - downloading
+        await db.transcriptions.update_one(
+            {"id": transcription_id},
+            {"$set": {"progress": 5, "status": "downloading", "updated_at": datetime.now(timezone.utc).isoformat()}}
+        )
+        
+        # Download audio
+        video_info = await download_audio_from_url(url, file_path)
+        
+        # Update with title and progress
+        await db.transcriptions.update_one(
+            {"id": transcription_id},
+            {"$set": {
+                "filename": f"{video_info['title'][:50]}.mp3",
+                "progress": 30,
+                "status": "processing",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        
+        # Verify file exists
+        if not os.path.exists(file_path):
+            raise Exception("Audio file not created")
+        
+        # Transcribe
+        api_key = os.environ.get('EMERGENT_LLM_KEY')
+        stt = OpenAISpeechToText(api_key=api_key)
+        
+        await db.transcriptions.update_one(
+            {"id": transcription_id},
+            {"$set": {"progress": 50, "updated_at": datetime.now(timezone.utc).isoformat()}}
+        )
+        
+        with open(file_path, "rb") as audio_file:
+            response = await stt.transcribe(
+                file=audio_file, model="whisper-1",
+                response_format="verbose_json", timestamp_granularities=["segment"]
+            )
+        
+        await db.transcriptions.update_one(
+            {"id": transcription_id},
+            {"$set": {"progress": 80, "updated_at": datetime.now(timezone.utc).isoformat()}}
+        )
+        
+        transcribed_text = response.text
+        detected_language = getattr(response, 'language', None)
+        duration = getattr(response, 'duration', None) or video_info.get('duration')
+        
+        formatted_text = transcribed_text
+        segments = getattr(response, 'segments', None)
+        if segments:
+            formatted_lines = []
+            for segment in segments:
+                if isinstance(segment, dict):
+                    start_val = segment.get('start', 0)
+                    text_val = segment.get('text', '').strip()
+                else:
+                    start_val = getattr(segment, 'start', 0)
+                    text_val = getattr(segment, 'text', '').strip()
+                start_time = format_timestamp(start_val)
+                if text_val:
+                    formatted_lines.append(f"[{start_time}] {text_val}")
+            if formatted_lines:
+                formatted_text = "\n".join(formatted_lines)
+        
+        await db.transcriptions.update_one(
+            {"id": transcription_id},
+            {"$set": {
+                "original_text": formatted_text,
+                "detected_language": detected_language,
+                "duration_seconds": duration,
+                "status": "completed",
+                "progress": 100,
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        
+        # Cleanup
+        try:
+            os.remove(file_path)
+        except:
+            pass
+            
+        logger.info(f"URL Transcription {transcription_id} completed successfully")
+        
+    except Exception as e:
+        logger.error(f"URL Transcription {transcription_id} failed: {str(e)}")
+        await db.transcriptions.update_one(
+            {"id": transcription_id},
+            {"$set": {
+                "status": "failed",
+                "progress": 0,
+                "original_text": f"Error: {str(e)}",
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }}
+        )
+        try:
+            os.remove(file_path)
+        except:
+            pass
+
+
 # ================= ROUTES =================
 
 @router.post("/transcriptions/upload")
@@ -229,6 +481,66 @@ async def upload_file(
     await db.transcriptions.insert_one(transcription_doc)
     background_tasks.add_task(process_transcription, transcription_id, str(file_path))
     return {"id": transcription_id, "status": "processing", "message": "File uploaded, transcription started"}
+
+
+@router.post("/transcriptions/url")
+async def transcribe_from_url(
+    request: URLTranscriptionRequest,
+    background_tasks: BackgroundTasks = None,
+    current_user: dict = Depends(_get_current_user())
+):
+    """Transcribe audio from video URL (YouTube, TikTok, Instagram, etc.) - Premium feature"""
+    
+    # Validate URL
+    if not request.url or not request.url.startswith(('http://', 'https://')):
+        raise HTTPException(status_code=400, detail="Invalid URL format")
+    
+    if not is_valid_video_url(request.url):
+        raise HTTPException(
+            status_code=400, 
+            detail="URL not supported. Supported: YouTube, TikTok, Instagram, Twitter/X, Facebook, Vimeo, Twitch, LinkedIn, Dailymotion, SoundCloud"
+        )
+    
+    # Check subscription - URL transcription is premium only
+    settings = await get_settings()
+    is_sub = await user_has_active_subscription(current_user["id"])
+    is_admin = current_user.get("is_admin", False)
+    
+    if not is_sub and not is_admin:
+        raise HTTPException(
+            status_code=403, 
+            detail="URL transcription is a premium feature. Please subscribe to access this feature."
+        )
+    
+    transcription_id = str(uuid.uuid4())
+    file_path = str(UPLOAD_DIR / f"{transcription_id}.mp3")
+    
+    transcription_doc = {
+        "id": transcription_id,
+        "user_id": current_user["id"],
+        "filename": extract_video_title(request.url),
+        "source_url": request.url,
+        "file_path": file_path,
+        "original_text": "",
+        "edited_text": None,
+        "detected_language": None,
+        "translated_text": None,
+        "translation_language": None,
+        "status": "downloading",
+        "progress": 0,
+        "duration_seconds": None,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat()
+    }
+    await db.transcriptions.insert_one(transcription_doc)
+    background_tasks.add_task(process_url_transcription, transcription_id, request.url, file_path)
+    
+    return {
+        "id": transcription_id, 
+        "status": "downloading", 
+        "message": "Video download started, transcription will begin shortly"
+    }
+
 
 @router.get("/transcriptions", response_model=List[TranscriptionResponse])
 async def get_transcriptions(current_user: dict = Depends(_get_current_user())):

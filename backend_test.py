@@ -195,6 +195,127 @@ class VxScribAPITester:
         # Restore token
         self.token = temp_token
 
+    def test_url_transcription_feature(self):
+        """Test URL transcription feature for premium users"""
+        print("\n" + "="*50)
+        print("TESTING URL TRANSCRIPTION FEATURE")
+        print("="*50)
+        
+        # Test 1: Non-premium user should get 403
+        if self.token:
+            print("\n🔍 Testing URL transcription with regular user (should fail)...")
+            success, response = self.run_test(
+                "URL transcription - Regular user (403 expected)",
+                "POST",
+                "transcriptions/url",
+                403,
+                data={"url": "https://vimeo.com/123456789"}
+            )
+        
+        # Test 2: Admin user should be able to use URL transcription
+        print("\n🔍 Testing URL transcription with admin user...")
+        # Login as admin
+        admin_success, admin_response = self.run_test(
+            "Admin login for URL test",
+            "POST",
+            "auth/login",
+            200,
+            data={
+                "email": "admin@transcriptflow.com",
+                "password": "Admin2026!"
+            }
+        )
+        
+        if admin_success and 'access_token' in admin_response:
+            # Store current token and switch to admin
+            regular_token = self.token
+            self.token = admin_response['access_token']
+            
+            # Test valid URL with admin
+            success, response = self.run_test(
+                "URL transcription - Admin user (should start download)",
+                "POST",
+                "transcriptions/url",
+                200,
+                data={"url": "https://vimeo.com/123456789"}
+            )
+            
+            if success:
+                print(f"   ✅ URL transcription started: {response.get('message', 'No message')}")
+                transcription_id = response.get('id')
+                if transcription_id:
+                    print(f"   ✅ Transcription ID: {transcription_id}")
+            
+            # Test invalid URL format
+            self.run_test(
+                "URL transcription - Invalid URL format",
+                "POST",
+                "transcriptions/url",
+                400,
+                data={"url": "not-a-valid-url"}
+            )
+            
+            # Test unsupported platform
+            self.run_test(
+                "URL transcription - Unsupported platform",
+                "POST",
+                "transcriptions/url",
+                400,
+                data={"url": "https://unsupported-platform.com/video"}
+            )
+            
+            # Test empty URL
+            self.run_test(
+                "URL transcription - Empty URL",
+                "POST",
+                "transcriptions/url",
+                400,
+                data={"url": ""}
+            )
+            
+            # Restore regular token
+            self.token = regular_token
+        
+        # Test 3: Get transcriptions list to verify URL transcription appears
+        if self.token:
+            success, response = self.run_test(
+                "Get transcriptions list",
+                "GET",
+                "transcriptions",
+                200
+            )
+            
+            if success and isinstance(response, list):
+                url_transcriptions = [t for t in response if t.get('source_url')]
+                print(f"   📊 Found {len(url_transcriptions)} URL transcriptions in history")
+                
+                for trans in url_transcriptions[:3]:  # Show first 3
+                    print(f"   📄 {trans.get('filename', 'Unknown')} - Status: {trans.get('status', 'Unknown')}")
+
+    def test_subscription_status(self):
+        """Test subscription status endpoint"""
+        print("\n" + "="*50)
+        print("TESTING SUBSCRIPTION STATUS")
+        print("="*50)
+        
+        if self.token:
+            success, response = self.run_test(
+                "Get subscription status",
+                "GET",
+                "subscription/status",
+                200
+            )
+            
+            if success:
+                has_subscription = response.get('has_subscription', False)
+                print(f"   📊 Has subscription: {has_subscription}")
+                if 'expires_at' in response:
+                    print(f"   📅 Expires at: {response['expires_at']}")
+                if 'usage_this_month' in response:
+                    print(f"   📈 Usage this month: {response['usage_this_month']}s")
+                if 'free_limit' in response:
+                    print(f"   🎯 Free limit: {response['free_limit']}s")
+
     def test_vxscrib_branding(self):
         """Test VxScrib branding in API responses"""
         print("\n" + "="*50)
@@ -223,6 +344,8 @@ class VxScribAPITester:
         self.test_auth_flow()
         self.test_admin_login()
         self.test_protected_endpoints()
+        self.test_subscription_status()
+        self.test_url_transcription_feature()
         
         # Print summary
         print("\n" + "="*60)
