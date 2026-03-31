@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from '../context/LanguageContext';
 
-const SITE_URL = 'https://transcriptflow.com';
+const SITE_URL = 'https://vxscrib.io';
 
 const StructuredData = ({ type = 'website' }) => {
   const { t } = useTranslation();
@@ -10,7 +10,7 @@ const StructuredData = ({ type = 'website' }) => {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "TranscriptFlow",
+    "name": "VxScrib",
     "url": SITE_URL,
     "logo": `${SITE_URL}/logo.png`,
     "description": lang === 'fr'
@@ -22,7 +22,7 @@ const StructuredData = ({ type = 'website' }) => {
   const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "TranscriptFlow",
+    "name": "VxScrib",
     "url": SITE_URL,
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
@@ -50,7 +50,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "Comment fonctionne la transcription audio par IA ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "TranscriptFlow utilise l'IA Whisper d'OpenAI pour convertir automatiquement vos fichiers audio et vidéo en texte. Uploadez simplement votre fichier et obtenez une transcription précise avec horodatage en quelques minutes."
+          "text": "VxScrib utilise l'IA Whisper d'OpenAI pour convertir automatiquement vos fichiers audio et vidéo en texte. Uploadez simplement votre fichier et obtenez une transcription précise avec horodatage en quelques minutes."
         }
       },
       {
@@ -58,7 +58,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "Quels formats audio sont supportés ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "TranscriptFlow supporte les formats MP3, MP4, MPEG, M4A, WAV et WebM. La taille maximale par fichier est de 25 Mo."
+          "text": "VxScrib supporte les formats MP3, MP4, MPEG, M4A, WAV et WebM. La taille maximale par fichier est de 25 Mo."
         }
       },
       {
@@ -66,7 +66,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "La transcription est-elle gratuite ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Oui, TranscriptFlow offre un plan gratuit avec une limite mensuelle de transcription. Pour un usage illimité, des abonnements mensuels et annuels sont disponibles."
+          "text": "Oui, VxScrib offre un plan gratuit avec une limite mensuelle de transcription. Pour un usage illimité, des abonnements mensuels et annuels sont disponibles."
         }
       },
       {
@@ -74,7 +74,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "Quelles langues sont supportées ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "L'IA Whisper détecte automatiquement la langue de votre audio. TranscriptFlow supporte plus de 50 langues pour la transcription et propose la traduction vers 10 langues."
+          "text": "L'IA Whisper détecte automatiquement la langue de votre audio. VxScrib supporte plus de 50 langues pour la transcription et propose la traduction vers 10 langues."
         }
       },
       {
@@ -82,7 +82,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "Mes données sont-elles protégées ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "TranscriptFlow est conforme au RGPD. Vos fichiers audio sont traités et supprimés après transcription. Vous pouvez exporter ou supprimer toutes vos données à tout moment."
+          "text": "VxScrib est conforme au RGPD. Vos fichiers audio sont traités et supprimés après transcription. Vous pouvez exporter ou supprimer toutes vos données à tout moment."
         }
       }
     ] : [
@@ -91,7 +91,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "How does AI audio transcription work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "TranscriptFlow uses OpenAI's Whisper AI to automatically convert your audio and video files to text. Simply upload your file and get an accurate timestamped transcription in minutes."
+          "text": "VxScrib uses OpenAI's Whisper AI to automatically convert your audio and video files to text. Simply upload your file and get an accurate timestamped transcription in minutes."
         }
       },
       {
@@ -99,7 +99,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "What audio formats are supported?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "TranscriptFlow supports MP3, MP4, MPEG, M4A, WAV and WebM formats. Maximum file size is 25 MB per file."
+          "text": "VxScrib supports MP3, MP4, MPEG, M4A, WAV and WebM formats. Maximum file size is 25 MB per file."
         }
       },
       {
@@ -107,7 +107,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "Is transcription free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, TranscriptFlow offers a free plan with a monthly transcription limit. For unlimited use, monthly and yearly subscriptions are available."
+          "text": "Yes, VxScrib offers a free plan with a monthly transcription limit. For unlimited use, monthly and yearly subscriptions are available."
         }
       },
       {
@@ -115,7 +115,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "What languages are supported?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Whisper AI automatically detects your audio language. TranscriptFlow supports 50+ languages for transcription and offers translation to 10 languages."
+          "text": "Whisper AI automatically detects your audio language. VxScrib supports 50+ languages for transcription and offers translation to 10 languages."
         }
       },
       {
@@ -123,7 +123,7 @@ const StructuredData = ({ type = 'website' }) => {
         "name": "Is my data protected?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "TranscriptFlow is GDPR compliant. Audio files are processed and deleted after transcription. You can export or delete all your data at any time."
+          "text": "VxScrib is GDPR compliant. Audio files are processed and deleted after transcription. You can export or delete all your data at any time."
         }
       }
     ]

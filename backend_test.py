@@ -3,7 +3,7 @@ import sys
 import json
 from datetime import datetime
 
-class TranscriptFlowAPITester:
+class VxScribAPITester:
     def __init__(self, base_url="https://voice-pay-demo-3.preview.emergentagent.com"):
         self.base_url = base_url
         self.token = None
@@ -195,13 +195,31 @@ class TranscriptFlowAPITester:
         # Restore token
         self.token = temp_token
 
+    def test_vxscrib_branding(self):
+        """Test VxScrib branding in API responses"""
+        print("\n" + "="*50)
+        print("TESTING VXSCRIB BRANDING")
+        print("="*50)
+        
+        # Test root endpoint returns VxScrib API
+        success, response = self.run_test("Root API returns VxScrib branding", "GET", "", 200)
+        
+        if success:
+            if response.get('message') == 'VxScrib API':
+                print("   ✅ API message contains 'VxScrib API'")
+                self.log_test("VxScrib API message verification", True, 200, "Correct branding found")
+            else:
+                print(f"   ❌ Expected 'VxScrib API', got: {response.get('message')}")
+                self.log_test("VxScrib API message verification", False, 200, f"Wrong branding: {response.get('message')}")
+
     def run_all_tests(self):
         """Run all test suites"""
-        print("🚀 Starting TranscriptFlow API Tests")
+        print("🚀 Starting VxScrib API Tests")
         print(f"🌐 Base URL: {self.base_url}")
         
         # Run test suites
         self.test_health_endpoints()
+        self.test_vxscrib_branding()
         self.test_auth_flow()
         self.test_admin_login()
         self.test_protected_endpoints()
@@ -233,7 +251,7 @@ class TranscriptFlowAPITester:
         return self.tests_passed == self.tests_run
 
 def main():
-    tester = TranscriptFlowAPITester()
+    tester = VxScribAPITester()
     success = tester.run_all_tests()
     return 0 if success else 1
 

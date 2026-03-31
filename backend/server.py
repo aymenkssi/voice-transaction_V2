@@ -40,7 +40,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create the main app
-app = FastAPI(title="TranscriptFlow API")
+app = FastAPI(title="VxScrib API")
 
 # Initialize route modules
 from routes import init_auth_routes, router as auth_router
@@ -62,7 +62,7 @@ app.include_router(admin_router)
 # General routes
 @app.get("/api/")
 async def root():
-    return {"message": "TranscriptFlow API", "version": "2.0.0"}
+    return {"message": "VxScrib API", "version": "2.0.0"}
 
 @app.get("/api/health")
 async def health_check():

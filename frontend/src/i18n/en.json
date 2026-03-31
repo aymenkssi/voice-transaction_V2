@@ -35,7 +35,7 @@
     ],
     "ctaOverline": "Ready to start?",
     "ctaTitle": "Ready to transform your media?",
-    "ctaSubtitle": "Join thousands of users who use TranscriptFlow for their projects.",
+    "ctaSubtitle": "Join thousands of users who use VxScrib for their projects.",
     "ctaButton": "Start Now",
     "footer": "All rights reserved."
   },
@@ -223,11 +223,11 @@
     "sections": [
       {
         "title": "1. Introduction",
-        "content": "TranscriptFlow is committed to protecting the privacy of its users. This privacy policy describes how we collect, use and protect your personal data, in accordance with the General Data Protection Regulation (GDPR - EU 2016/679)."
+        "content": "VxScrib is committed to protecting the privacy of its users. This privacy policy describes how we collect, use and protect your personal data, in accordance with the General Data Protection Regulation (GDPR - EU 2016/679)."
       },
       {
         "title": "2. Data Controller",
-        "content": "The data controller is TranscriptFlow. For any questions about your data, contact us at: privacy@transcriptflow.com"
+        "content": "The data controller is VxScrib. For any questions about your data, contact us at: privacy@transcriptflow.com"
       },
       {
         "title": "3. Data Collected",
@@ -270,7 +270,7 @@
     "sections": [
       {
         "title": "1. Purpose",
-        "content": "These terms govern the use of the TranscriptFlow service, an AI-powered audio transcription tool."
+        "content": "These terms govern the use of the VxScrib service, an AI-powered audio transcription tool."
       },
       {
         "title": "2. Registration",
@@ -278,11 +278,11 @@
       },
       {
         "title": "3. Transcription Service",
-        "content": "TranscriptFlow provides an AI-based automatic transcription service. Transcription accuracy depends on audio quality and is not guaranteed at 100%."
+        "content": "VxScrib provides an AI-based automatic transcription service. Transcription accuracy depends on audio quality and is not guaranteed at 100%."
       },
       {
         "title": "4. Intellectual Property",
-        "content": "You retain ownership of your audio files and generated transcriptions. TranscriptFlow does not claim any rights to your content."
+        "content": "You retain ownership of your audio files and generated transcriptions. VxScrib does not claim any rights to your content."
       },
       {
         "title": "5. Acceptable Use",
@@ -290,7 +290,7 @@
       },
       {
         "title": "6. Limitation of Liability",
-        "content": "TranscriptFlow shall not be liable for transcription errors, service interruptions, or data loss."
+        "content": "VxScrib shall not be liable for transcription errors, service interruptions, or data loss."
       },
       {
         "title": "7. Data Protection",
@@ -302,7 +302,7 @@
       },
       {
         "title": "9. Termination",
-        "content": "You can delete your account at any time. TranscriptFlow reserves the right to suspend or delete an account in case of violation of these terms."
+        "content": "You can delete your account at any time. VxScrib reserves the right to suspend or delete an account in case of violation of these terms."
       },
       {
         "title": "10. Governing Law",
@@ -358,7 +358,7 @@
     "limitReached": "Limit reached",
     "limitReachedMsg": "You've reached your free monthly limit. Subscribe for unlimited access.",
     "subscribePro": "Upgrade to Pro",
-    "proTitle": "TranscriptFlow Pro",
+    "proTitle": "VxScrib Pro",
     "proDesc": "Unlimited transcription",
     "perMonth": "/month",
     "subscribed": "Subscribed",

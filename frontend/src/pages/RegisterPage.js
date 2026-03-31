@@ -43,7 +43,7 @@ const RegisterPage = () => {
         <div className="absolute inset-0 bg-stele-bg/30"></div>
         <div className="absolute bottom-12 left-12 right-12 z-10">
           <p className="font-playfair text-2xl text-stele-primary leading-relaxed">"{t('auth.quoteRegister')}"</p>
-          <p className="font-inter text-sm text-stele-muted mt-4 tracking-wide">TranscriptFlow</p>
+          <p className="font-inter text-sm text-stele-muted mt-4 tracking-wide">VxScrib</p>
         </div>
       </div>
 
@@ -54,7 +54,7 @@ const RegisterPage = () => {
               <div className="w-8 h-8 bg-stele-primary flex items-center justify-center">
                 <Mic2 className="w-4 h-4 text-white" strokeWidth={1.5} />
               </div>
-              <span className="font-manrope font-bold text-lg text-stele-primary">TranscriptFlow</span>
+              <span className="font-manrope font-bold text-lg text-stele-primary">VxScrib</span>
             </Link>
             <LanguageSwitcher />
           </div>

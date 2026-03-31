@@ -38,7 +38,7 @@ const LandingPage = () => {
             <div className="w-8 h-8 bg-stele-primary flex items-center justify-center">
               <Mic2 className="w-4 h-4 text-white" strokeWidth={1.5} />
             </div>
-            <span className="font-manrope font-bold text-lg tracking-tight text-stele-primary">TranscriptFlow</span>
+            <span className="font-manrope font-bold text-lg tracking-tight text-stele-primary">VxScrib</span>
           </Link>
           <div className="flex items-center gap-6">
             <LanguageSwitcher />
@@ -181,7 +181,7 @@ const LandingPage = () => {
             <div className="w-6 h-6 bg-stele-primary flex items-center justify-center">
               <Mic2 className="w-3 h-3 text-white" strokeWidth={1.5} />
             </div>
-            <span className="font-manrope font-bold text-sm text-stele-primary">TranscriptFlow</span>
+            <span className="font-manrope font-bold text-sm text-stele-primary">VxScrib</span>
           </div>
           <div className="flex items-center gap-6">
             <Link to="/privacy" className="font-inter text-xs text-stele-muted hover:text-stele-primary transition-colors" data-testid="footer-privacy">
@@ -191,7 +191,7 @@ const LandingPage = () => {
               {t('nav.terms')}
             </Link>
           </div>
-          <p className="font-inter text-xs text-stele-muted tracking-wide">&copy; 2026 TranscriptFlow. {t('landing.footer')}</p>
+          <p className="font-inter text-xs text-stele-muted tracking-wide">&copy; 2026 VxScrib. {t('landing.footer')}</p>
         </div>
       </footer>
     </div>

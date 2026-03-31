@@ -1,80 +1,80 @@
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from '../context/LanguageContext';
 
-const SITE_URL = 'https://transcriptflow.com';
-const SITE_NAME = 'TranscriptFlow';
+const SITE_URL = 'https://vxscrib.io';
+const SITE_NAME = 'VxScrib';
 
 const seoData = {
   '/': {
     fr: {
-      title: 'TranscriptFlow — Transcription Audio IA Professionnelle',
+      title: 'VxScrib — Transcription Audio IA Professionnelle',
       description: 'Transcrivez vos fichiers audio et vidéo en texte avec une précision professionnelle grâce à l\'IA Whisper. Multilingue, export SRT/TXT, traduction automatique. Essayez gratuitement.',
-      keywords: 'transcription audio, transcription IA, convertir audio en texte, Whisper AI, transcription automatique, sous-titres, SRT, transcription vidéo, transcription en ligne'
+      keywords: 'transcription audio, transcription IA, convertir audio en texte, Whisper AI, transcription automatique, sous-titres, SRT, transcription vidéo, VxScrib'
     },
     en: {
-      title: 'TranscriptFlow — Professional AI Audio Transcription',
+      title: 'VxScrib — Professional AI Audio Transcription',
       description: 'Transcribe your audio and video files to text with professional accuracy using Whisper AI. Multilingual, SRT/TXT export, auto-translation. Try free.',
-      keywords: 'audio transcription, AI transcription, convert audio to text, Whisper AI, automatic transcription, subtitles, SRT, video transcription, online transcription'
+      keywords: 'audio transcription, AI transcription, convert audio to text, Whisper AI, automatic transcription, subtitles, SRT, video transcription, VxScrib'
     }
   },
   '/login': {
     fr: {
-      title: 'Connexion — TranscriptFlow',
-      description: 'Connectez-vous à votre compte TranscriptFlow pour accéder à vos transcriptions audio et vidéo.',
-      keywords: 'connexion TranscriptFlow, login transcription'
+      title: 'Connexion — VxScrib',
+      description: 'Connectez-vous à votre compte VxScrib pour accéder à vos transcriptions audio et vidéo.',
+      keywords: 'connexion VxScrib, login transcription'
     },
     en: {
-      title: 'Login — TranscriptFlow',
-      description: 'Log in to your TranscriptFlow account to access your audio and video transcriptions.',
-      keywords: 'TranscriptFlow login, transcription login'
+      title: 'Login — VxScrib',
+      description: 'Log in to your VxScrib account to access your audio and video transcriptions.',
+      keywords: 'VxScrib login, transcription login'
     }
   },
   '/register': {
     fr: {
-      title: 'Créer un Compte — TranscriptFlow',
-      description: 'Inscrivez-vous gratuitement sur TranscriptFlow et commencez à transcrire vos fichiers audio avec l\'IA Whisper.',
-      keywords: 'inscription TranscriptFlow, créer compte transcription, essai gratuit transcription IA'
+      title: 'Créer un Compte — VxScrib',
+      description: 'Inscrivez-vous gratuitement sur VxScrib et commencez à transcrire vos fichiers audio avec l\'IA Whisper.',
+      keywords: 'inscription VxScrib, créer compte transcription, essai gratuit transcription IA'
     },
     en: {
-      title: 'Create Account — TranscriptFlow',
-      description: 'Sign up free on TranscriptFlow and start transcribing your audio files with Whisper AI.',
-      keywords: 'TranscriptFlow signup, create transcription account, free AI transcription trial'
+      title: 'Create Account — VxScrib',
+      description: 'Sign up free on VxScrib and start transcribing your audio files with Whisper AI.',
+      keywords: 'VxScrib signup, create transcription account, free AI transcription trial'
     }
   },
   '/dashboard': {
     fr: {
-      title: 'Tableau de Bord — TranscriptFlow',
-      description: 'Gérez vos transcriptions audio, uploadez de nouveaux fichiers et suivez votre utilisation sur TranscriptFlow.',
+      title: 'Tableau de Bord — VxScrib',
+      description: 'Gérez vos transcriptions audio, uploadez de nouveaux fichiers et suivez votre utilisation sur VxScrib.',
       keywords: 'dashboard transcription, gestion transcription audio'
     },
     en: {
-      title: 'Dashboard — TranscriptFlow',
-      description: 'Manage your audio transcriptions, upload new files and track your usage on TranscriptFlow.',
+      title: 'Dashboard — VxScrib',
+      description: 'Manage your audio transcriptions, upload new files and track your usage on VxScrib.',
       keywords: 'transcription dashboard, audio transcription management'
     }
   },
   '/privacy': {
     fr: {
-      title: 'Politique de Confidentialité — TranscriptFlow',
-      description: 'Découvrez comment TranscriptFlow protège vos données personnelles et respecte le RGPD. Transparence totale sur le traitement de vos informations.',
-      keywords: 'politique confidentialité, RGPD, protection données, TranscriptFlow vie privée'
+      title: 'Politique de Confidentialité — VxScrib',
+      description: 'Découvrez comment VxScrib protège vos données personnelles et respecte le RGPD. Transparence totale sur le traitement de vos informations.',
+      keywords: 'politique confidentialité, RGPD, protection données, VxScrib vie privée'
     },
     en: {
-      title: 'Privacy Policy — TranscriptFlow',
-      description: 'Learn how TranscriptFlow protects your personal data and complies with GDPR. Full transparency on how your information is processed.',
-      keywords: 'privacy policy, GDPR, data protection, TranscriptFlow privacy'
+      title: 'Privacy Policy — VxScrib',
+      description: 'Learn how VxScrib protects your personal data and complies with GDPR. Full transparency on how your information is processed.',
+      keywords: 'privacy policy, GDPR, data protection, VxScrib privacy'
     }
   },
   '/terms': {
     fr: {
-      title: 'Conditions d\'Utilisation — TranscriptFlow',
-      description: 'Consultez les conditions générales d\'utilisation de TranscriptFlow, le service de transcription audio par IA.',
-      keywords: 'conditions utilisation, CGU, TranscriptFlow termes'
+      title: 'Conditions d\'Utilisation — VxScrib',
+      description: 'Consultez les conditions générales d\'utilisation de VxScrib, le service de transcription audio par IA.',
+      keywords: 'conditions utilisation, CGU, VxScrib termes'
     },
     en: {
-      title: 'Terms of Service — TranscriptFlow',
-      description: 'View TranscriptFlow\'s terms of service for the AI audio transcription platform.',
-      keywords: 'terms of service, terms and conditions, TranscriptFlow terms'
+      title: 'Terms of Service — VxScrib',
+      description: 'View VxScrib\'s terms of service for the AI audio transcription platform.',
+      keywords: 'terms of service, terms and conditions, VxScrib terms'
     }
   }
 };
@@ -122,8 +122,8 @@ const SEOHead = ({ page = '/', customTitle, customDescription }) => {
       <meta name="twitter:description" content={description} />
 
       {/* Additional SEO */}
-      <meta name="author" content="TranscriptFlow" />
-      <meta name="application-name" content="TranscriptFlow" />
+      <meta name="author" content="VxScrib" />
+      <meta name="application-name" content="VxScrib" />
       <meta name="theme-color" content="#111111" />
     </Helmet>
   );

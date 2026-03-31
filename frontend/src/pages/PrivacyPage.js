@@ -21,7 +21,7 @@ const PrivacyPage = () => {
               <div className="w-8 h-8 bg-stele-primary flex items-center justify-center">
                 <Mic2 className="w-4 h-4 text-white" strokeWidth={1.5} />
               </div>
-              <span className="font-manrope font-bold text-lg text-stele-primary">TranscriptFlow</span>
+              <span className="font-manrope font-bold text-lg text-stele-primary">VxScrib</span>
             </Link>
           </div>
           <LanguageSwitcher />

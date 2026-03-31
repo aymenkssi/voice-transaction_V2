@@ -1,9 +1,9 @@
 {
   "summary": {
-    "total_tests": 8,
-    "passed_tests": 7,
+    "total_tests": 10,
+    "passed_tests": 9,
     "failed_tests": 1,
-    "success_rate": "87.5%"
+    "success_rate": "90.0%"
   },
   "test_results": [
     {
@@ -19,6 +19,20 @@
       "status_code": 200,
       "expected_status": 200,
       "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "Root API returns VxScrib branding",
+      "success": true,
+      "status_code": 200,
+      "expected_status": 200,
+      "message": "Status: 200, Expected: 200"
+    },
+    {
+      "test": "VxScrib API message verification",
+      "success": true,
+      "status_code": 200,
+      "expected_status": null,
+      "message": "Correct branding found"
     },
     {
       "test": "User registration",
@@ -63,5 +77,5 @@
       "message": "Status: 403, Expected: 401, Response: {'detail': 'Not authenticated'}"
     }
   ],
-  "timestamp": "2026-03-30T15:45:02.092397"
+  "timestamp": "2026-03-31T08:37:44.060883"
 }

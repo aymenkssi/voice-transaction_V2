@@ -135,7 +135,7 @@ const DashboardPage = () => {
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-stele-primary flex items-center justify-center"><Mic2 className="w-4 h-4 text-white" strokeWidth={1.5} /></div>
             <div>
-              <h1 className="font-manrope font-bold text-lg text-stele-primary tracking-tight">TranscriptFlow</h1>
+              <h1 className="font-manrope font-bold text-lg text-stele-primary tracking-tight">VxScrib</h1>
               <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-stele-accent">{t('nav.dashboard')}</p>
             </div>
           </div>

@@ -294,7 +294,7 @@ const AdminPage = () => {
               </div>
               <div>
                 <h1 className="font-manrope font-bold text-lg text-stele-primary tracking-tight">Administration</h1>
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-stele-accent">TranscriptFlow</p>
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-stele-accent">VxScrib</p>
               </div>
             </div>
           </div>

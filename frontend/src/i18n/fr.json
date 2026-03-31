@@ -35,7 +35,7 @@
     ],
     "ctaOverline": "Prêt à commencer ?",
     "ctaTitle": "Prêt à transformer vos médias ?",
-    "ctaSubtitle": "Rejoignez des milliers d'utilisateurs qui utilisent TranscriptFlow pour leurs projets.",
+    "ctaSubtitle": "Rejoignez des milliers d'utilisateurs qui utilisent VxScrib pour leurs projets.",
     "ctaButton": "Commencer Maintenant",
     "footer": "Tous droits réservés."
   },
@@ -223,11 +223,11 @@
     "sections": [
       {
         "title": "1. Introduction",
-        "content": "TranscriptFlow s'engage à protéger la vie privée de ses utilisateurs. Cette politique de confidentialité décrit comment nous collectons, utilisons et protégeons vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679)."
+        "content": "VxScrib s'engage à protéger la vie privée de ses utilisateurs. Cette politique de confidentialité décrit comment nous collectons, utilisons et protégeons vos données personnelles, conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679)."
       },
       {
         "title": "2. Responsable du traitement",
-        "content": "Le responsable du traitement des données est TranscriptFlow. Pour toute question relative à vos données, contactez-nous à : privacy@transcriptflow.com"
+        "content": "Le responsable du traitement des données est VxScrib. Pour toute question relative à vos données, contactez-nous à : privacy@transcriptflow.com"
       },
       {
         "title": "3. Données collectées",
@@ -270,7 +270,7 @@
     "sections": [
       {
         "title": "1. Objet",
-        "content": "Les présentes conditions régissent l'utilisation du service TranscriptFlow, un outil de transcription audio propulsé par l'intelligence artificielle."
+        "content": "Les présentes conditions régissent l'utilisation du service VxScrib, un outil de transcription audio propulsé par l'intelligence artificielle."
       },
       {
         "title": "2. Inscription",
@@ -278,11 +278,11 @@
       },
       {
         "title": "3. Service de transcription",
-        "content": "TranscriptFlow fournit un service de transcription automatique basé sur l'IA. La précision des transcriptions dépend de la qualité audio et n'est pas garantie à 100%."
+        "content": "VxScrib fournit un service de transcription automatique basé sur l'IA. La précision des transcriptions dépend de la qualité audio et n'est pas garantie à 100%."
       },
       {
         "title": "4. Propriété intellectuelle",
-        "content": "Vous restez propriétaire de vos fichiers audio et des transcriptions générées. TranscriptFlow ne revendique aucun droit sur votre contenu."
+        "content": "Vous restez propriétaire de vos fichiers audio et des transcriptions générées. VxScrib ne revendique aucun droit sur votre contenu."
       },
       {
         "title": "5. Utilisation acceptable",
@@ -290,7 +290,7 @@
       },
       {
         "title": "6. Limitation de responsabilité",
-        "content": "TranscriptFlow ne saurait être tenu responsable des erreurs de transcription, des interruptions de service ou de la perte de données."
+        "content": "VxScrib ne saurait être tenu responsable des erreurs de transcription, des interruptions de service ou de la perte de données."
       },
       {
         "title": "7. Protection des données",
@@ -302,7 +302,7 @@
       },
       {
         "title": "9. Résiliation",
-        "content": "Vous pouvez supprimer votre compte à tout moment. TranscriptFlow se réserve le droit de suspendre ou supprimer un compte en cas de violation des présentes conditions."
+        "content": "Vous pouvez supprimer votre compte à tout moment. VxScrib se réserve le droit de suspendre ou supprimer un compte en cas de violation des présentes conditions."
       },
       {
         "title": "10. Droit applicable",
@@ -358,7 +358,7 @@
     "limitReached": "Limite atteinte",
     "limitReachedMsg": "Vous avez atteint votre limite mensuelle gratuite. Abonnez-vous pour continuer.",
     "subscribePro": "Passer à Pro",
-    "proTitle": "TranscriptFlow Pro",
+    "proTitle": "VxScrib Pro",
     "proDesc": "Transcription illimitée",
     "perMonth": "/mois",
     "subscribed": "Abonné",

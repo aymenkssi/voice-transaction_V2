@@ -29,7 +29,7 @@ const ProfilePage = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `transcriptflow_data_${user.email}.json`;
+      link.download = `vxscrib_data_${user.email}.json`;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -74,7 +74,7 @@ const ProfilePage = () => {
               </div>
               <div>
                 <h1 className="font-manrope font-bold text-lg text-stele-primary tracking-tight">{t('profile.title')}</h1>
-                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-stele-accent">TranscriptFlow</p>
+                <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-stele-accent">VxScrib</p>
               </div>
             </div>
           </div>

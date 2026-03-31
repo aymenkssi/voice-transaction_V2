@@ -40,7 +40,7 @@ const LoginPage = () => {
               <div className="w-8 h-8 bg-stele-primary flex items-center justify-center">
                 <Mic2 className="w-4 h-4 text-white" strokeWidth={1.5} />
               </div>
-              <span className="font-manrope font-bold text-lg text-stele-primary">TranscriptFlow</span>
+              <span className="font-manrope font-bold text-lg text-stele-primary">VxScrib</span>
             </Link>
             <LanguageSwitcher />
           </div>
@@ -81,7 +81,7 @@ const LoginPage = () => {
         <div className="absolute inset-0 bg-stele-primary/40"></div>
         <div className="absolute bottom-12 left-12 right-12 z-10">
           <p className="font-playfair text-2xl text-white/90 leading-relaxed">"{t('auth.quoteLogin')}"</p>
-          <p className="font-inter text-sm text-white/50 mt-4 tracking-wide">TranscriptFlow</p>
+          <p className="font-inter text-sm text-white/50 mt-4 tracking-wide">VxScrib</p>
         </div>
       </div>
     </div>

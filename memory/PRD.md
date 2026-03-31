@@ -1,7 +1,7 @@
-# TranscriptFlow - PRD
+# VxScrib - PRD
 
 ## Problem Statement
-Application SaaS de transcription audio importée depuis GitHub (`voice-transaction`). L'objectif est de corriger les bugs, améliorer le design ("Stèle"/élégant), ajouter l'enregistrement audio direct, un panel d'administration, la conformité RGPD, le bilinguisme (FR/EN), et un système d'abonnement PayPal avec limites configurables, plans annuels et coupons.
+Application SaaS de transcription audio. Renommée de "VxScrib" vers "VxScrib". L'objectif est de corriger les bugs, améliorer le design ("Stèle"/élégant), ajouter l'enregistrement audio direct, un panel d'administration, la conformité RGPD, le bilinguisme (FR/EN), et un système d'abonnement PayPal avec limites configurables, plans annuels et coupons.
 
 ## Architecture
 - **Frontend**: React 19 + Tailwind CSS + Shadcn UI
@@ -9,6 +9,7 @@ Application SaaS de transcription audio importée depuis GitHub (`voice-transact
 - **AI**: OpenAI Whisper via `emergentintegrations` (Emergent LLM Key)
 - **Auth**: JWT (bcrypt + PyJWT)
 - **Payments**: PayPal (monthly + yearly plans)
+- **Domain**: vxscrib.io (recommandé)
 
 ## Code Structure
 ```text
