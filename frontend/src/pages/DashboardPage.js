@@ -277,7 +277,7 @@ const DashboardPage = () => {
                   </button>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  {['TikTok', 'Instagram', 'Twitter/X', 'Facebook', 'Vimeo', 'Twitch', 'Dailymotion'].map(platform => (
+                  {['YouTube', 'TikTok', 'Instagram', 'Twitter/X', 'Facebook', 'Vimeo', 'Twitch'].map(platform => (
                     <span key={platform} className="px-3 py-1 bg-stele-bg text-stele-muted font-mono text-[10px] tracking-wider">
                       {platform}
                     </span>

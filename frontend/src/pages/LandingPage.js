@@ -89,8 +89,8 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero */}
-      <section className="hero-stele relative min-h-[90vh] flex items-center bg-gradient-to-br from-stele-bg via-white to-stele-secondary" aria-label="Hero">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,0,0,0.03)_0%,transparent_50%)]"></div>
+      <section className="hero-stele relative min-h-[90vh] flex items-center" aria-label="Hero">
+        <img src="https://static.prod-images.emergentagent.com/jobs/b8e781d6-d45d-487f-8504-1d30db03f44e/images/c08646188e1c34ab17c5b2ab8452beafae317b2760310fef43097e96d3ee1415.png" alt="Fond abstrait transcription audio" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-32 pb-24">
           <div className="max-w-3xl">
             <p className="overline mb-6 opacity-0 animate-fade-in">{t('landing.overline')}</p>
@@ -139,7 +139,7 @@ const LandingPage = () => {
 
       {/* How it Works */}
       <section className="py-24 md:py-32 px-6 md:px-12 bg-stele-bg border-t border-stele-border relative" aria-label="How it works">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,0,0,0.02)_0%,transparent_50%)]"></div>
+        <img src="https://static.prod-images.emergentagent.com/jobs/b8e781d6-d45d-487f-8504-1d30db03f44e/images/68e2553162abdf514f86499a6075cdcc987bb7dbad7d772e287ed78dbe2c7b7c.png" alt="Motif décoratif processus de transcription" className="absolute inset-0 w-full h-full object-cover opacity-10" loading="lazy" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-20">
             <p className="overline mb-4">{t('landing.processOverline')}</p>
@@ -160,7 +160,7 @@ const LandingPage = () => {
 
       {/* CTA */}
       <section className="relative py-24 md:py-32 px-6 md:px-12 bg-stele-primary overflow-hidden" aria-label="Call to action">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
+        <img src="https://static.prod-images.emergentagent.com/jobs/b8e781d6-d45d-487f-8504-1d30db03f44e/images/4bed761fee4e32d7fd9d37cbbe2d2db0d99bbc3f7e82cfbc99d84b001a60377e.png" alt="Fond appel a l'action TranscriptFlow" className="absolute inset-0 w-full h-full object-cover opacity-30" loading="lazy" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <p className="font-inter text-xs tracking-[0.2em] uppercase font-medium text-stele-accent mb-6">{t('landing.ctaOverline')}</p>
           <h2 className="font-playfair text-3xl md:text-5xl text-white mb-6 tracking-tight">{t('landing.ctaTitle')}</h2>

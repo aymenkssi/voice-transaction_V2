@@ -76,8 +76,9 @@ const LoginPage = () => {
         </div>
       </div>
 
-      <div className="hidden lg:block lg:w-1/2 relative bg-stele-primary">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(255,255,255,0.15)_0%,transparent_50%)]"></div>
+      <div className="hidden lg:block lg:w-1/2 relative">
+        <img src="https://static.prod-images.emergentagent.com/jobs/b8e781d6-d45d-487f-8504-1d30db03f44e/images/4bed761fee4e32d7fd9d37cbbe2d2db0d99bbc3f7e82cfbc99d84b001a60377e.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-stele-primary/40"></div>
         <div className="absolute bottom-12 left-12 right-12 z-10">
           <p className="font-playfair text-2xl text-white/90 leading-relaxed">"{t('auth.quoteLogin')}"</p>
           <p className="font-inter text-sm text-white/50 mt-4 tracking-wide">VxScrib</p>

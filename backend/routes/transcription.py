@@ -210,7 +210,10 @@ async def process_transcription(transcription_id: str, file_path: str):
 
 def extract_video_title(url: str) -> str:
     """Extract a clean title from video URL"""
-    if 'tiktok.com' in url:
+    # Common patterns for video platforms
+    if 'youtube.com' in url or 'youtu.be' in url:
+        return "YouTube Video"
+    elif 'tiktok.com' in url:
         return "TikTok Video"
     elif 'instagram.com' in url:
         return "Instagram Video"
@@ -224,10 +227,6 @@ def extract_video_title(url: str) -> str:
         return "Twitch Video"
     elif 'linkedin.com' in url:
         return "LinkedIn Video"
-    elif 'dailymotion.com' in url:
-        return "Dailymotion Video"
-    elif 'soundcloud.com' in url:
-        return "SoundCloud Audio"
     else:
         return "Video URL"
 
@@ -235,6 +234,7 @@ def extract_video_title(url: str) -> str:
 def is_valid_video_url(url: str) -> bool:
     """Check if URL is from a supported platform"""
     supported_patterns = [
+        r'(youtube\.com|youtu\.be)',
         r'tiktok\.com',
         r'instagram\.com',
         r'(twitter\.com|x\.com)',
@@ -530,7 +530,7 @@ async def transcribe_from_url(
     if not is_valid_video_url(request.url):
         raise HTTPException(
             status_code=400, 
-            detail="URL not supported. Supported: TikTok, Instagram, Twitter/X, Facebook, Vimeo, Twitch, LinkedIn, Dailymotion, SoundCloud"
+            detail="URL not supported. Supported: YouTube, TikTok, Instagram, Twitter/X, Facebook, Vimeo, Twitch, LinkedIn, Dailymotion, SoundCloud"
         )
     
     # Check subscription - URL transcription is premium only
@@ -620,9 +620,7 @@ async def translate_transcription(
     transcription_id: str, request: TranslationRequest,
     current_user: dict = Depends(_get_current_user())
 ):
-    """Translate transcription - requires OPENAI_API_KEY in .env"""
-    import openai
-    
+    from emergentintegrations.llm.openai import OpenAILLM
     transcription = await db.transcriptions.find_one(
         {"id": transcription_id, "user_id": current_user["id"]}
     )
@@ -631,32 +629,16 @@ async def translate_transcription(
     text_to_translate = transcription.get("edited_text") or transcription.get("original_text")
     if not text_to_translate:
         raise HTTPException(status_code=400, detail="No text to translate")
-    
     languages = {
         "en": "English", "fr": "French", "es": "Spanish", "de": "German",
         "it": "Italian", "pt": "Portuguese", "zh": "Chinese", "ja": "Japanese",
         "ko": "Korean", "ar": "Arabic"
     }
     target_lang_name = languages.get(request.target_language, request.target_language)
-    
-    # Use OpenAI API directly
-    api_key = os.environ.get('OPENAI_API_KEY')
-    if not api_key:
-        raise HTTPException(status_code=500, detail="Translation service not configured. Set OPENAI_API_KEY in .env")
-    
-    client = openai.OpenAI(api_key=api_key)
+    api_key = os.environ.get('EMERGENT_LLM_KEY')
+    llm = OpenAILLM(api_key=api_key)
     prompt = f"Translate the following text to {target_lang_name}. Keep any timestamps in their original format. Only output the translated text, nothing else:\n\n{text_to_translate}"
-    
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=4000
-        )
-        translated_text = response.choices[0].message.content
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Translation failed: {str(e)}")
-    
+    translated_text = await llm.generate_response(prompt=prompt, model="gpt-4o-mini")
     await db.transcriptions.update_one(
         {"id": transcription_id},
         {"$set": {
