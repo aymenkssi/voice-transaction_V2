@@ -620,7 +620,9 @@ async def translate_transcription(
     transcription_id: str, request: TranslationRequest,
     current_user: dict = Depends(_get_current_user())
 ):
-    from emergentintegrations.llm.openai import OpenAILLM
+    """Translate transcription - requires OPENAI_API_KEY in .env"""
+    import openai
+    
     transcription = await db.transcriptions.find_one(
         {"id": transcription_id, "user_id": current_user["id"]}
     )
@@ -629,16 +631,32 @@ async def translate_transcription(
     text_to_translate = transcription.get("edited_text") or transcription.get("original_text")
     if not text_to_translate:
         raise HTTPException(status_code=400, detail="No text to translate")
+    
     languages = {
         "en": "English", "fr": "French", "es": "Spanish", "de": "German",
         "it": "Italian", "pt": "Portuguese", "zh": "Chinese", "ja": "Japanese",
         "ko": "Korean", "ar": "Arabic"
     }
     target_lang_name = languages.get(request.target_language, request.target_language)
-    api_key = os.environ.get('EMERGENT_LLM_KEY')
-    llm = OpenAILLM(api_key=api_key)
+    
+    # Use OpenAI API directly
+    api_key = os.environ.get('OPENAI_API_KEY')
+    if not api_key:
+        raise HTTPException(status_code=500, detail="Translation service not configured. Set OPENAI_API_KEY in .env")
+    
+    client = openai.OpenAI(api_key=api_key)
     prompt = f"Translate the following text to {target_lang_name}. Keep any timestamps in their original format. Only output the translated text, nothing else:\n\n{text_to_translate}"
-    translated_text = await llm.generate_response(prompt=prompt, model="gpt-4o-mini")
+    
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=4000
+        )
+        translated_text = response.choices[0].message.content
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Translation failed: {str(e)}")
+    
     await db.transcriptions.update_one(
         {"id": transcription_id},
         {"$set": {

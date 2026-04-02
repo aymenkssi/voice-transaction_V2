@@ -61,6 +61,7 @@ DB_NAME=vxscrib
 CORS_ORIGINS=*
 WHISPER_MODEL=base
 JWT_SECRET=VOTRE_SECRET_JWT_ALEATOIRE_32_CHARS
+OPENAI_API_KEY=sk-votre-cle-openai
 PAYPAL_CLIENT_ID=VOTRE_PAYPAL_CLIENT_ID
 PAYPAL_SECRET=VOTRE_PAYPAL_SECRET
 PAYPAL_MODE=live
@@ -74,7 +75,7 @@ EOF
 >   - `small` : Meilleure qualité, ~4GB RAM, plus lent
 >   - `medium` : Haute qualité, ~8GB RAM, lent
 > - Générez un JWT_SECRET aléatoire : `openssl rand -hex 32`
-> - **Pas besoin de clé API OpenAI** - Whisper tourne en local gratuitement !
+> - `OPENAI_API_KEY` : **Optionnel** - Uniquement pour la traduction (pas pour la transcription)
 
 ### Créer le dossier uploads
 

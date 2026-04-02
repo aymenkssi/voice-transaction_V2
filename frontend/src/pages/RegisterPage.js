@@ -38,9 +38,8 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen bg-stele-bg flex">
       <SEOHead page="/register" />
-      <div className="hidden lg:block lg:w-1/2 relative">
-        <img src="https://static.prod-images.emergentagent.com/jobs/b8e781d6-d45d-487f-8504-1d30db03f44e/images/c08646188e1c34ab17c5b2ab8452beafae317b2760310fef43097e96d3ee1415.png" alt="Illustration inscription TranscriptFlow" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-stele-bg/30"></div>
+      <div className="hidden lg:block lg:w-1/2 relative bg-gradient-to-br from-stele-bg via-white to-stele-secondary">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(0,0,0,0.03)_0%,transparent_50%)]"></div>
         <div className="absolute bottom-12 left-12 right-12 z-10">
           <p className="font-playfair text-2xl text-stele-primary leading-relaxed">"{t('auth.quoteRegister')}"</p>
           <p className="font-inter text-sm text-stele-muted mt-4 tracking-wide">VxScrib</p>
