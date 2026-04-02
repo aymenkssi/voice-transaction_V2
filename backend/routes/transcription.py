@@ -210,10 +210,7 @@ async def process_transcription(transcription_id: str, file_path: str):
 
 def extract_video_title(url: str) -> str:
     """Extract a clean title from video URL"""
-    # Common patterns for video platforms
-    if 'youtube.com' in url or 'youtu.be' in url:
-        return "YouTube Video"
-    elif 'tiktok.com' in url:
+    if 'tiktok.com' in url:
         return "TikTok Video"
     elif 'instagram.com' in url:
         return "Instagram Video"
@@ -227,6 +224,10 @@ def extract_video_title(url: str) -> str:
         return "Twitch Video"
     elif 'linkedin.com' in url:
         return "LinkedIn Video"
+    elif 'dailymotion.com' in url:
+        return "Dailymotion Video"
+    elif 'soundcloud.com' in url:
+        return "SoundCloud Audio"
     else:
         return "Video URL"
 
@@ -234,7 +235,6 @@ def extract_video_title(url: str) -> str:
 def is_valid_video_url(url: str) -> bool:
     """Check if URL is from a supported platform"""
     supported_patterns = [
-        r'(youtube\.com|youtu\.be)',
         r'tiktok\.com',
         r'instagram\.com',
         r'(twitter\.com|x\.com)',
@@ -530,7 +530,7 @@ async def transcribe_from_url(
     if not is_valid_video_url(request.url):
         raise HTTPException(
             status_code=400, 
-            detail="URL not supported. Supported: YouTube, TikTok, Instagram, Twitter/X, Facebook, Vimeo, Twitch, LinkedIn, Dailymotion, SoundCloud"
+            detail="URL not supported. Supported: TikTok, Instagram, Twitter/X, Facebook, Vimeo, Twitch, LinkedIn, Dailymotion, SoundCloud"
         )
     
     # Check subscription - URL transcription is premium only
